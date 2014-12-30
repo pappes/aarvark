@@ -1,15 +1,15 @@
-// Copyright (c) 2015, pappes. All rights reserved. Use of this source code
+// Copyright (c) 2015, Pappes. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library pappesUtility_test;
+library pappes_utility_test;
 
-import 'package:pappesUtility/pappesUtility.dart';
+import 'package:pappes_utility/pappes_utility.dart';
 import 'package:unittest/unittest.dart';
 
 void main() => defineTests();
 
 void defineTests() {
-  group('pappesUtility ifNull testing', () {
+  group('pappes_utility ifNull testing', () {
     test('absent number', () {
       expect(ifNull(null,1), 1);
     });
@@ -32,7 +32,7 @@ void defineTests() {
       expect(ifNull(123,'1'), 123);
     });
   });
-  group('pappesUtility RamCache positive testing', () {
+  group('pappes_utility RamCache positive testing', () {
     test('integer retrieval', () {
       RamCache.remember('int', 1);
       RamCache.remember('float', 1.0);
@@ -60,7 +60,7 @@ void defineTests() {
       expect(RamCache.recall('int', 'session4'), null);
     });
   });
-  group('pappesUtility RamCache negative testing', () {
+  group('pappes_utility RamCache negative testing', () {
     test('absent value', () {
       expect(RamCache.recall('uninitialised key') == null, true);
     });

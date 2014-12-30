@@ -1,8 +1,8 @@
-// Copyright (c) 2015, pappes. All rights reserved. Use of this source code
+// Copyright (c) 2015, Pappes. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 /// Collection of utility classes and functions to make programs simpler.
-part of pappesUtility.base;
+part of pappes_utility.base;
 
 
 /// Arbitary storage of objects in memory for later use.

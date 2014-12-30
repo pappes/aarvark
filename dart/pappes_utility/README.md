@@ -1,12 +1,12 @@
-# pappesUtility
+# pappes_utility
 
-A library for pappes.   Others may find it useful.
+A library for Pappes.   Others may find it useful.
 
 ## Usage
 
 A simple usage example:
 
-    import 'package:pappesUtility/pappesUtility.dart';
+    import 'package:pappes_utility/pappes_utility.dart';
 
     main() {
       int x=10;

@@ -1,9 +1,9 @@
-// Copyright (c) 2014, <your name>. All rights reserved. Use of this source code
+// Copyright (c) 2014, Pappes. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library pappesUtility.example;
+library pappes_utility.example;
 
-import 'package:pappesUtility/pappesUtility.dart';
+import 'package:pappes_utility/pappes_utility.dart';
 
 main() {
   
