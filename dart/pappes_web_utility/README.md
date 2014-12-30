@@ -11,6 +11,8 @@ TODO:
 *sort out unit tests
 **publish
 *link from bookmarklets
+*update copywrite date in pappes_utility
+* check out https://github.com/karan/validator.dart
 A simple usage example:
 
     import 'package:pappes_web_utility/pappes_web_utility.dart';

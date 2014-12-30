@@ -12,7 +12,7 @@ part of pappes_utility.base;
 /// * Objects are stored with a key for retrieval.
 /// * The cache can be segmented per session 
 ///   to prevent unintended crosstalk for server side caches
-/// * The cache is implemented with static methods so tht it can be uses 
+/// * The cache is implemented with static methods so that it can be used 
 ///   without explicitily creating instances of [RamCache]
 ///   
 /// ##Node Examples
