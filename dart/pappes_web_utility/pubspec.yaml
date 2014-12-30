@@ -1,0 +1,7 @@
+name: pappes_web_utility
+version: 0.0.1
+author: Pappes
+description: A library useful for web applications.  Currently includes MyHtml which is a class with HTML helper functions and MyJS which is a class with JavaScript helper functions
+homepage: https://github.com/pappes/aarvark
+dev_dependencies:
+  unittest: any
