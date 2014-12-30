@@ -9,7 +9,7 @@ import 'package:unittest/unittest.dart';
 void main() => defineTests();
 
 void defineTests() {
-  /*group('pappesUtility ifNull testing', () {
+  group('pappesUtility ifNull testing', () {
     test('absent number', () {
       expect(ifNull(null,1), 1);
     });
@@ -77,5 +77,5 @@ void defineTests() {
       expect(RamCache.recall('string 1'), 'hello');
       expect(RamCache.recall('string 2'), 'HELLO');
     });
-  });*/
+  });
 }
