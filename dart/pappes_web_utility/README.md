@@ -8,6 +8,7 @@ TODO:
 *fix up this readme
 *find other TODO in source
 **add remove params
+** renove overlays
 *sort out unit tests
 **publish
 *link from bookmarklets
