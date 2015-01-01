@@ -42,7 +42,7 @@ void defineTests() {
      test('redirect_http_b64_encode', () => expect(MyHtml.removeUrlRedirect('http://www.abc.com/redirect?l=aHR0cDovL3d3dy5yZWFsdXJsLmNvbS90YXJnZXQvP2M9ZCZlPTEyMw=='), 'http://www.realurl.com/target/?c=d&e=123'));
      test('redirect_http_b64_encode_param', () => expect(MyHtml.removeUrlRedirect('http://www.abc.com/redirect?l=aHR0cDovL3d3dy5yZWFsdXJsLmNvbS90YXJnZXQvP2M9ZCZlPTEyMw==&x=y&a=b'), 'http://www.realurl.com/target/?c=d&e=123'));
    });
-  
+
   group('pappes_web_utility MyHtml integration tests test initial HTML state ', () {
     test('non_redirect', () => expect(document.querySelector('#non_redirect').attributes['href'], 'http://www.abc.com/noredirect?u=realurl_com'));
     test('redirect_simple_www', () =>  expect(document.querySelector('#redirect_simple_www').attributes['href'], 'http://www.abc.com/redirect?u=www.realurl.com'));
@@ -84,5 +84,83 @@ void defineTests() {
     test('redirect_http_b64_encode', () => expect(document.querySelector('#redirect_http_b64_encode').attributes['href'], 'http://www.realurl.com/target/?c=d&e=123'));
     test('redirect_http_b64_encode_param', () => expect(document.querySelector('#redirect_http_b64_encode_param').attributes['href'], 'http://www.realurl.com/target/?c=d&e=123'));
   });
+
+  group('pappes_web_utility MyHtml retargetAllHrefs tests initial HTML state ', () {
+    test('no_target', () => expect(document.querySelector('#no_target').attributes['target'], isNull));
+    test('_blank_target', () =>  expect(document.querySelector('#_blank_target').attributes['target'], '_blank'));
+    test('_parent_target', () =>  expect(document.querySelector('#_parent_target').attributes['target'], '_parent'));
+    test('_self_target', () =>  expect(document.querySelector('#_self_target').attributes['target'], '_self'));
+    test('_top_target', () =>  expect(document.querySelector('#_top_target').attributes['target'], '_top'));
+    test('frame_target', () =>  expect(document.querySelector('#frame_target').attributes['target'], 'frame_a'));
+  });  
+
+  group('pappes_web_utility MyHtml retargetAllHrefs change state blank ', () {
+    test('alter href links', () {
+      expect(MyHtml.retargetAllHrefs()
+    , isNull);
+    });
+  });  
+  
+ group('pappes_web_utility MyHtml retargetAllHrefs tests modified HTML state', () {
+   test('no_target', () => expect(document.querySelector('#no_target').attributes['target'], '_blank'));
+   test('_blank_target', () =>  expect(document.querySelector('#_blank_target').attributes['target'], '_blank'));
+   test('_parent_target', () =>  expect(document.querySelector('#_parent_target').attributes['target'], '_blank'));
+   test('_self_target', () =>  expect(document.querySelector('#_self_target').attributes['target'], '_blank'));
+   test('_top_target', () =>  expect(document.querySelector('#_top_target').attributes['target'], '_blank'));
+   test('frame_target', () =>  expect(document.querySelector('#frame_target').attributes['target'], '_blank'));
+  });
+ 
+ group('pappes_web_utility MyHtml retargetAllHrefs change state frame_b', () {
+   test('alter href links', () {
+     expect(MyHtml.retargetAllHrefs('frame_b')
+   , isNull);
+   });
+ });  
+ 
+group('pappes_web_utility MyHtml retargetAllHrefs tests modified HTML state', () {
+  test('no_target', () => expect(document.querySelector('#no_target').attributes['target'], 'frame_b'));
+  test('_blank_target', () =>  expect(document.querySelector('#_blank_target').attributes['target'], 'frame_b'));
+  test('_parent_target', () =>  expect(document.querySelector('#_parent_target').attributes['target'], 'frame_b'));
+  test('_self_target', () =>  expect(document.querySelector('#_self_target').attributes['target'], 'frame_b'));
+  test('_top_target', () =>  expect(document.querySelector('#_top_target').attributes['target'], 'frame_b'));
+  test('frame_target', () =>  expect(document.querySelector('#frame_target').attributes['target'], 'frame_b'));
+ });
+
+group('pappes_web_utility MyHtml retargetAllHrefs change state _self', () {
+  test('alter href links', () {
+    expect(MyHtml.retargetAllHrefs('_self')
+  , isNull);
+  });
+});  
+
+group('pappes_web_utility MyHtml retargetAllHrefs tests modified HTML state', () {
+ test('no_target', () => expect(document.querySelector('#no_target').attributes['target'], '_self'));
+ test('_blank_target', () =>  expect(document.querySelector('#_blank_target').attributes['target'], '_self'));
+ test('_parent_target', () =>  expect(document.querySelector('#_parent_target').attributes['target'], '_self'));
+ test('_self_target', () =>  expect(document.querySelector('#_self_target').attributes['target'], '_self'));
+ test('_top_target', () =>  expect(document.querySelector('#_top_target').attributes['target'], '_self'));
+ test('frame_target', () =>  expect(document.querySelector('#frame_target').attributes['target'], '_self'));
+});
+
+
+ 
+group('pappes_web_utility MyHtml removeAllScripts tests inital HTML state', () {
+  test('script_x', () => expect(document.querySelector('#script_x').attributes['src'], 'packages/browser/x.js'));
+  test('script_y', () =>  expect(document.querySelector('#script_y').attributes['src'], 'packages/browser/y.js'));
+  test('script_z', () =>  expect(document.querySelector('#script_z').attributes['src'], 'packages/browser/z.js'));
+ });
+
+group('pappes_web_utility MyHtml removeAllScripts change state _self', () {
+  test('alter href links', () {
+    expect(MyHtml.removeAllScripts()
+  , isNull);
+  });
+});  
+
+group('pappes_web_utility MyHtml removeAllScripts tests modified HTML state', () {
+  test('script_x', () => expect(document.querySelector('#script_x'), isNull));
+  test('script_y', () =>  expect(document.querySelector('#script_y'), isNull));
+  test('script_z', () =>  expect(document.querySelector('#script_z'), isNull));
+});
 }
 

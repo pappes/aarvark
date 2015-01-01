@@ -6,7 +6,7 @@
 library pappes_web_utility.base;
 
 
-import 'dart:html' show Element;
+import 'dart:html';
 import 'dart:js' as js show context;
 import 'package:pappes_utility/pappes_utility.dart';
 

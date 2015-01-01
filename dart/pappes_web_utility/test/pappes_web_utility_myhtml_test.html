@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>pappes_web_utility</title>
     
-    <!--script src="packages/browser/interop.js"></script-->
     <script async type="application/dart" src="all_test.dart"></script>
     <script async src="packages/browser/dart.js"></script>
+    <script id=script_x async src="packages/browser/x.js"></script>
+    <script id=script_y async src="packages/browser/y.js"></script>
+    <script id=script_z async src="packages/browser/z.js"></script>
     
   </head>
   <body>
@@ -41,6 +43,26 @@
     http redirect URL with real base64 payload</a><br>
     <a id=redirect_http_b64_encode_param href=http://www.abc.com/redirect?l=aHR0cDovL3d3dy5yZWFsdXJsLmNvbS90YXJnZXQvP2M9ZCZlPTEyMw==&x=y&a=b>
     http redirect URL with real base64 payload and fake params</a><br>
+    
+    
+    <a id=no_target href=http://www.abc.com/noredirect?u=realurl_com>
+    No target URL</a><br>
+    <a id=_blank_target href=http://www.abc.com/noredirect?u=realurl_com target="_blank">
+    Blank target URL</a><br>
+    <a id=_parent_target href=http://www.abc.com/noredirect?u=realurl_com target="_parent">
+    Parent target URL</a><br>
+    <a id=_self_target href=http://www.abc.com/noredirect?u=realurl_com target="_self">
+    Self target URL</a><br>
+    <a id=_top_target href=http://www.abc.com/noredirect?u=realurl_com target="_top">
+    Top target URL</a><br>
+    <a id=frame_target href=http://www.abc.com/noredirect?u=realurl_com target="frame_a">
+    Frame target URL</a><br>
+    
+    <frameset cols="25%,50%,25%">
+      <frame id=frame_a src="frame_a.htm">
+      <frame id=frame_b src="frame_b.htm">
+      <frame id=frame_c src="frame_c.htm">
+    </frameset>
 
   </body>
 </html>

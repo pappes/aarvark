@@ -11,6 +11,7 @@ part of pappes_web_utility.base;
 /// ## purpose 
 /// 
 /// * Extend built-in dart JavaScript functionality.
+/// Note: atob and btoa are also available from dart:html.window without reverting to a javascript interop.
 ///   
 
 

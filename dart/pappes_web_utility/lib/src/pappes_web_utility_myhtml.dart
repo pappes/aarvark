@@ -136,6 +136,30 @@ class MyHtml {
       DOM.children.forEach((child) => iterateHTMLDOM(child, process));
     process(DOM);
   }
+  
+  /// Removes any element that obsures another element.
+  static void removeAllOverlays() {
+  }
+  
+  /// Removes all scripts from the browser DOM.
+  static void removeAllScripts() {
+    document.querySelectorAll('script').forEach((Element e) {
+      print(e.attributes['src']);
+      e.remove();
+    });
+  }
+  
+  /// Removes all event handlers from all elements on the browser DOM.
+  static void removeAllHandlers() {
+  }
+  
+  /// Changes the target of all <a> anchor href elements.  
+  /// 
+  /// * Default [target] is '_blank' (new tab)
+  /// * Valid values for [target] are '_blank', '_self', '_parent', '_top', or _framename_
+  static void retargetAllHrefs([String target = '_blank']) {
+    document.querySelectorAll('a').forEach((Element e) => e.attributes['target'] = target);
+  }
 
   ///Returns an exisiting singleton.
   ///
