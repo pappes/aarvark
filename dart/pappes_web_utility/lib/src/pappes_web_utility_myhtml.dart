@@ -37,8 +37,8 @@ class MyHtml {
         break;
       }
       //check that it is not null before using it.  Store it for later if it is a valid URL.
-      if (MyJS.base64Decode(param) != null && (MyJS.base64Decode(param).toLowerCase().startsWith('www') || MyJS.base64Decode(param).toLowerCase().startsWith('http'))) {
-        base64Uri = MyJS.base64Decode(param);
+      if (base64Decode(param) != null && (base64Decode(param).toLowerCase().startsWith('www') || base64Decode(param).toLowerCase().startsWith('http'))) {
+        base64Uri = base64Decode(param);
       }
     }  
     finalUrl = setUriSchemeToHttp(ifNull(finalUrl, base64Uri));

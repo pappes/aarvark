@@ -3,17 +3,10 @@
 
 library pappes_web_utility.test;
 
-import 'package:unittest/unittest.dart';
-import 'package:pappes_web_utility/pappes_web_utility.dart';
+import 'pappes_web_utility_myhtml_test.dart' as MyHtml_test;
+import 'pappes_web_utility_myjs_test.dart' as MyJS_test;
 
 main() {
-  group('pappes_web_utility MyJS tests', () {
-
-    test('test encode', () {
-      expect(MyJS.base64Encode('Hello World'), 'SGVsbG8gV29ybGQ=');
-    });
-    test('test decode', () {
-      expect(MyJS.base64Decode('SGVsbG8gV29ybGQ='), 'Hello World');
-    });
-  });
+  MyHtml_test.defineTests();
+  MyJS_test.defineTests();
 }

@@ -23,9 +23,9 @@ class MyJS {
   /// if [val] is not valid base64 then returns null
   /// if library dart:js is not working throws StateError
   /// 
-  ///    print(MyJS.base64Decode('SGVsbG8gV29ybGQ='));
+  ///    print(MyJS.atob('SGVsbG8gV29ybGQ='));
   ///    
-  static String base64Decode(String val) {
+  static String atob(String val) {
     bool jsHasAtob;
     try {
       jsHasAtob = js.context.hasProperty('atob');
@@ -47,9 +47,9 @@ class MyJS {
   /// if [val] is not valid base64 then returns null
   /// if library dart:js is not working throws StateError
   /// 
-  ///    print(MyJS.base64Encode('Hello World'));
+  ///    print(MyJS.btoa('Hello World'));
   ///    
-  static String base64Encode(String val) {
+  static String btoa(String val) {
     bool jsHasBtoA;
     try {
       jsHasBtoA = js.context.hasProperty('btoa');

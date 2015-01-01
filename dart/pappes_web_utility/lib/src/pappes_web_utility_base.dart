@@ -20,5 +20,29 @@ part 'pappes_web_utility_myjs.dart';
 /// 
 ///    x = ifNull(x, y);//use x if it has a value otherwise use y
 String ifNull(test, alternate) {
-  return test != null ? test : alternate;
+return test != null ? test : alternate;
+}
+
+
+/// Converts [val] from base64 to text.
+///
+/// if [val] is not valid base64 then returns null
+/// if library dart:js is not working throws StateError
+/// 
+///    print(base64Decode('SGVsbG8gV29ybGQ='));
+///    
+String base64Decode(String val) {
+  return MyJS.atob(val);
+}
+
+
+/// Converts [val] from text to base64.
+///
+/// if [val] is not valid base64 then returns null
+/// if library dart:js is not working throws StateError
+/// 
+///    print(base64Encode('Hello World'));
+///    
+String base64Encode(String val) {
+  return MyJS.btoa(val);
 }
