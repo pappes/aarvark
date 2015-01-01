@@ -18,6 +18,35 @@ class MyHtml {
   //implimented as a singleton as all instances would behave the same anyway
   static final _singleton = new MyHtml._initialise();
   
+
+  
+  /// Changes [originalURL] to remove parameters.  
+  /// Optionally can replace old parameters with [replacementParameters].
+  /// Optionally can test for the presence of [searchFor] to identify URIs that should be modified.
+  ///
+  /// ## For example:
+  ///    MyHtml.setUriParameters('http://www.abc.com?x=HelloWorld&a=b', searchFor: 'HelloWorld', replacementParameters: 'abc=123')
+  static String setUriParameters(String originalUrl, {String searchFor, String replacementParameters}) {
+    String finalUrl;
+
+    Uri x = Uri.parse(originalUrl);
+    if (searchFor == null || x.query.toLowerCase().contains(searchFor.toLowerCase()))
+      x = new Uri(
+          scheme: x.scheme, 
+          userInfo: x.userInfo, 
+          host: x.host, 
+          port: x.port, 
+          path: x.path,
+          query: replacementParameters);
+    finalUrl = x.toString();
+        
+    if (RamCache.recall('loglevel')=='[INFO]')
+      print ('''
+             setUriParameters 
+                  originalUrl: $originalUrl 
+              became finalUrl: $finalUrl''');
+    return finalUrl;
+  }
   
   /// Changes [originalURL] to remove any attempt at redirection.
   ///
@@ -36,17 +65,18 @@ class MyHtml {
         finalUrl = param;
         break;
       }
-      //check that it is not null before using it.  Store it for later if it is a valid URL.
+      //check that it is not null before decoding it.  Store decoded value for later if it is a valid URL.
       if (base64Decode(param) != null && (base64Decode(param).toLowerCase().startsWith('www') || base64Decode(param).toLowerCase().startsWith('http'))) {
         base64Uri = base64Decode(param);
       }
     }  
     finalUrl = setUriSchemeToHttp(ifNull(finalUrl, base64Uri));
     finalUrl = ifNull(finalUrl, originalUrl);
-    print ('''
-          removeUrlRediriect 
-                originalUrl: $originalUrl 
-            became finalUrl: $finalUrl''');
+    if (RamCache.recall('loglevel')=='[INFO]')
+      print ('''
+            removeUrlRediriect 
+                  originalUrl: $originalUrl 
+              became finalUrl: $finalUrl''');
     return finalUrl;
   }
   

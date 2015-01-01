@@ -6,20 +6,21 @@ A library for Pappes.  Others might find it useful
 
 TODO:
 *fix up this readme
-*find other TODO in source
-**add remove params
-** renove overlays
-*sort out unit tests
+** remove HTML overlay pagess
 **publish
-*link from bookmarklets
-*update copywrite date in pappes_utility
+*link to this libary from bookmarklets
 * check out https://github.com/karan/validator.dart
 A simple usage example:
 
     import 'package:pappes_web_utility/pappes_web_utility.dart';
 
     main() {
-      var awesome = new Awesome();
+      print(base64Encode('Hello World'));
+      print(base64Decode('SGVsbG8gV29ybGQ='));
+      
+      print(MyHtml.setUriSchemeToHttp('www.abc.com')); //prints 'http://www.abc.com'
+      print(MyHtml.removeUrlRedirect('http://www.abc.com/redirect?u=www.realurl.com'));//prints 'http://www.realurl.com')
+      print(MyHtml.setUriParameters('http://www.abc.com?x=HelloWorld&a=b', searchFor: 'HelloWorld', replacementParameters: 'abc=123'));//prints 'http://www.abc.com?abc=123'
     }
 
 ## Features and bugs

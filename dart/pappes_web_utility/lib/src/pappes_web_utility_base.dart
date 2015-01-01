@@ -8,20 +8,10 @@ library pappes_web_utility.base;
 
 import 'dart:html' show Element;
 import 'dart:js' as js show context;
-//import 'package:pappesUtility/pappesUtility.dart';
+import 'package:pappes_utility/pappes_utility.dart';
 
 part 'pappes_web_utility_myhtml.dart';
 part 'pappes_web_utility_myjs.dart';
-
-
-//TODO remove
-/// Substitutes the value [alternate] if the value [test] is null.
-/// For exampple:
-/// 
-///    x = ifNull(x, y);//use x if it has a value otherwise use y
-String ifNull(test, alternate) {
-return test != null ? test : alternate;
-}
 
 
 /// Converts [val] from base64 to text.
