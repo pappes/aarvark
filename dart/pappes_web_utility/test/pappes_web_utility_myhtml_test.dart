@@ -162,5 +162,17 @@ group('pappes_web_utility MyHtml removeAllScripts tests modified HTML state', ()
   test('script_y', () =>  expect(document.querySelector('#script_y'), isNull));
   test('script_z', () =>  expect(document.querySelector('#script_z'), isNull));
 });
+
+group('pappes_web_utility MyHtml createElementFromHTML tests', () {
+  String fragment1 = '<iframe src="www.google.com"></iframe>';
+  String fragment2 = '<img class="abc" src="www.google.com">';
+  String fragment3 = '<a href="#" class="abc">abc</a>';
+  test('fragment1', () => expect(MyHtml.createElementFromHTML(fragment1).outerHtml, fragment1));
+  test('fragment2', () => expect(MyHtml.createElementFromHTML(fragment2).outerHtml, fragment2));
+  test('fragment3', () => expect(MyHtml.createElementFromHTML(fragment3).outerHtml, fragment3));
+  test('fragment1', () => expect(new Element.html(fragment1).outerHtml, '<iframe></iframe>'));
+  test('fragment2', () => expect(new Element.html(fragment2).outerHtml, fragment2));
+  test('fragment3', () => expect(new Element.html(fragment3).outerHtml, fragment3));
+});
 }
 

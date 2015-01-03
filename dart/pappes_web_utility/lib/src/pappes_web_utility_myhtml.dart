@@ -79,7 +79,7 @@ class MyHtml {
               became finalUrl: $finalUrl''');
     return finalUrl;
   }
-  
+
   /// Changes [originalURL] to use the http protocol if none specified.
   ///
   /// This is used to unsure that URLs that do not include the scheme 
@@ -98,9 +98,13 @@ class MyHtml {
     }
     return ifNull(finalURL, originalURL);
   }
-  
-  
 
+  /// Creates an HTML element from any valid [htmlFragment] of HTML.
+  ///
+  /// Does not have any of the normal security limitations.
+  static Element createElementFromHTML(String htmlFragment) {
+    return new Element.html(htmlFragment,treeSanitizer:new _NonTreeSanitizer());
+  }
   
   /// Alters a specific [attribute] of a HTML [Element], [node]
   /// by applying function [alter] to the [attribute].
@@ -170,5 +174,15 @@ class MyHtml {
   
   ///Constructor as invoked by static instances of this class.
   MyHtml._initialise() {
+  }
+}
+
+
+
+
+///implimentation of NodeTreeSanitizer that allows the HTML to contain anything
+class _NonTreeSanitizer implements NodeTreeSanitizer {
+  void sanitizeTree(Node node) {
+    //allow anything
   }
 }
