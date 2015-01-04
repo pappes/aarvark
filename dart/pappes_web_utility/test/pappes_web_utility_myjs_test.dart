@@ -11,6 +11,19 @@ void main() => defineTests();
 void defineTests() {
   group('pappes_web_utility MyJS tests', () {
 
+    test('test runAnyJavaScript console.log', () {
+      expect(MyJS.runAnyJavaScript('console.log(" unit testing runAnyJavaScript console.log " + (1+2));'), isNull);
+    });
+    test('test runAnyJavaScript math', () {
+      expect(MyJS.runAnyJavaScript('1+2'), 3);
+    });
+    test('test runAnyJavaScript string concatenation', () {
+      expect(MyJS.runAnyJavaScript('"1"+"2"'), '12');
+    });
+    print( 'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing: timer created 3 seconds ago!!!!"); }, 3000);')}');
+    test('test removeAllTimers', () {
+      expect(MyJS.removeAllTimers(), isNull);
+    });
     test('test encode', () {
       expect(base64Encode('Hello World'), 'SGVsbG8gV29ybGQ=');
     });
