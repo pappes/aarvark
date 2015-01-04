@@ -96,7 +96,7 @@ void defineTests() {
 
   group('pappes_web_utility MyHtml retargetAllHrefs change state blank ', () {
     test('alter href links', () {
-      expect(MyHtml.retargetAllHrefs()
+      expect(MyHtml.retargetAllHrefs(document)
     , isNull);
     });
   });  
@@ -112,7 +112,7 @@ void defineTests() {
  
  group('pappes_web_utility MyHtml retargetAllHrefs change state frame_b', () {
    test('alter href links', () {
-     expect(MyHtml.retargetAllHrefs('frame_b')
+     expect(MyHtml.retargetAllHrefs(document, 'frame_b')
    , isNull);
    });
  });  
@@ -128,7 +128,7 @@ group('pappes_web_utility MyHtml retargetAllHrefs tests modified HTML state', ()
 
 group('pappes_web_utility MyHtml retargetAllHrefs change state _self', () {
   test('alter href links', () {
-    expect(MyHtml.retargetAllHrefs('_self')
+    expect(MyHtml.retargetAllHrefs(document, '_self')
   , isNull);
   });
 });  
@@ -152,7 +152,7 @@ group('pappes_web_utility MyHtml removeAllScripts tests inital HTML state', () {
 
 group('pappes_web_utility MyHtml removeAllScripts change state _self', () {
   test('alter href links', () {
-    expect(MyHtml.removeAllScripts()
+    expect(MyHtml.removeAllScripts(document)
   , isNull);
   });
 });  
