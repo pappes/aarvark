@@ -20,7 +20,7 @@ void defineTests() {
     test('test runAnyJavaScript string concatenation', () {
       expect(MyJS.runAnyJavaScript('"1"+"2"'), '12');
     });
-    print( 'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing: timer created 3 seconds ago!!!!"); }, 3000);')}');
+    print( 'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing MyJS: timer created 3 seconds ago!!!!   MyJS.removeAllTimers should have stopped this message from appearing."); }, 3000);')}');
     test('test removeAllTimers', () {
       expect(MyJS.removeAllTimers(), isNull);
     });
