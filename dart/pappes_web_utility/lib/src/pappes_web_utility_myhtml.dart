@@ -114,7 +114,7 @@ class MyHtml {
   ///
   ///     alterAttribute(element, 'href', (url) => removeUrlRedirect(url)));
   ///
-  static void alterAttribute(Element node, String attribute, Object alter(Object a)) {
+  static alterAttribute(Element node, String attribute, Object alter(Object a)) {
     assert(alter is _MyHtml_Alter_Element);
     if (node.attributes.containsKey(attribute)) {
       node.attributes[attribute] = alter(node.attributes[attribute]);
@@ -127,14 +127,14 @@ class MyHtml {
   /// * [process] is a procedure that takes a single HTML [Element] and returns nothing
   ///
   ///    iterateHTMLDOM(document.body, (e) => printElement(e));
-  static void iterateHTMLDOM(Element DOM, void process(Element e)) {
+  static iterateHTMLDOM(Element DOM, void process(Element e)) {
     assert(process is _MyHtml_Element_Process);
     if (DOM.hasChildNodes()) DOM.children.forEach((child) => iterateHTMLDOM(child, process));
     process(DOM);
   }
-  
+
   /// Removes all script tags from [htmlDoc].
-  static void removeAllScripts(HtmlDocument htmlDoc) {
+  static removeAllScripts(HtmlDocument htmlDoc) {
     htmlDoc.querySelectorAll('script').forEach((Element e) {
       e.remove();
     });
@@ -151,30 +151,40 @@ class MyHtml {
   ///
   /// * Default [target] is '_blank' (new tab)
   /// * Valid values for [target] are '_blank', '_self', '_parent', '_top', or _framename_
-  static void retargetAllHrefs(HtmlDocument htmlDoc, [String target = '_blank']) {
+  static retargetAllHrefs(HtmlDocument htmlDoc, [String target = '_blank']) {
     htmlDoc.querySelectorAll('a').forEach((Element e) => e.attributes['target'] = target);
   }
 
+  /// Converts src and href attributes to be absolute URL's.
+  ///
+  /// * [childElement] the <img>, <iframe>, <a>, <object> or other element that has an external reference
+  /// * [baseUrl] the parent URL to use for resolving
+  static resolveElementUrl(Element childElement, String baseUrl) {
+    Uri baseUri = Uri.parse(baseUrl);
+    childElement.attributes.forEach((attr, val) {
+      if (['src','href'].contains(attr)) val = baseUri.resolve(val).toString();
+    });    
+  }
   /// Removes any element that obsures another element from [htmlDoc].
   ///
   /// If there is an iFrame on the page, finds the widest iFrame and:
   /// *if it is referenced and source is available, moves it inline
   /// *if it is referenced and source is not available, opens it in the current tab
   /// *if it is inline, opens it in the current tab
-  /// 
+  ///
   /// IFrame or not it then, strips out everything except:
   /// * <a> tags that are based on text (leave hyperlinks, removes buttons)
   /// * <object> tags to allow videos to remain
   /// * <video> tags to allow videos to remain
   /// * <input> tags to allow searching
   /// and keep all elements that are parents of these elements
-  /// 
+  ///
   ///    removeAllOverlays(document);
-  static void removeAllOverlays(HtmlDocument htmlDoc) {
+  static removeAllOverlays(HtmlDocument htmlDoc) {
     _stripDownPage(htmlDoc);
     ElementList iFrames = htmlDoc.querySelectorAll('iframe');
     if (iFrames != null) {
-      iFrames.sort(_compareElementWidth);
+      iFrames.toList().sort(_compareElementWidth);
       new MyIFrame(htmlDoc, iFrames.last).makeProminant(_stripDownPage);
     }
   }
@@ -185,16 +195,16 @@ class MyHtml {
   }
 
   /// Remove unwanted HTML [Element] tags from a [HtmlDocument] or [ParentNode]
-  /// 
+  ///
   /// strips out everything except:
   /// * <a> tags that are based on text (leave hyperlinks, removes buttons)
   /// * <object> tags to allow videos to remain
   /// * <video> tags to allow videos to remain
   /// * <input> tags to allow searching
   /// and keep all elements that are parents of these elements
-  /// 
+  ///
   ///    _stripDownPage(document);
-  static void _stripDownPage(target) {
+  static _stripDownPage(target) {
     //internal recursive function
     void _whitelistElementAndParents(Element e, Set s) {
       if (e.parent != null) _whitelistElementAndParents(e.parent, s);
@@ -216,12 +226,14 @@ class MyHtml {
       if (e.text != null) _whitelistElementAndParents(e, elementsToBeDeleted);
     });
     //destroy everything that remains
-    elementsToBeDeleted.forEach((Element e) => e.remove());
+    elementsToBeDeleted.forEach((Element e) {
+      e.remove();
+    });
     if (target is HtmlDocument) {
       removeAllHandlers(target);
     }
   }
-  
+
 
 
   ///Returns an exisiting singleton.
@@ -239,29 +251,29 @@ class MyHtml {
 
 
 
-class MyIFrame{//TODO(pappes) remove direct reference to window
+class MyIFrame {//TODO(pappes) remove direct reference to window
   IFrameElement _iFrame;//TODO (pappes) inherit from IframeElement would be better
   HtmlDocument _htmlDoc;//TODO(pappes) get doc from IFrame would be better
-  
+
   /// Enhances the IFrame to make it more visible for the user.
-  /// 
+  ///
   /// * attempts to inline the iframe
   /// * otherwise loads IFrame source in tab
-  /// [cleanUpProcess] is an optional function that takes 
+  /// [cleanUpProcess] is an optional function that takes
   /// * a [HtmlDocument] (when the IFrame was loaded in the tab)
   /// * or [IFrameElement] (when the IFrame was inlined into the document)
-  /// and runs extra cleanup processing on it 
+  /// and runs extra cleanup processing on it
   makeProminant([void cleanUpProcess(dynamic parentNode)]) {
-    String iFrameHtml;
-    if (Uri.parse(window.location.href).host == Uri.parse(_iFrame.attributes['src']).host) {
-      iFrameHtml = _buildIFrameAsHtml(_iFrame, cleanUpProcess);
-    }
-    if (iFrameHtml != null) {
-      _htmlDoc.querySelectorAll('iframe').forEach((Element frame) => frame.remove()); //remove all iFrames from document body
-      _embedIFrameInBody(iFrameHtml, cleanUpProcess);
+    String iFrameSource;
+    if (_iFrame.attributes['src'].contains('</html>')) {
+      iFrameSource = _iFrame.attributes['src'];
     } else {
-      window.location.assign(_iFrame.attributes['src']);
+      iFrameSource = Uri.parse(window.location.href).resolve(_iFrame.attributes['src']).toString();
     }
+    _buildIFrameAsHtml(iFrameSource, cleanUpProcess);
+    _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
+      frame.remove(); //remove all iFrames from document body
+    });
     if (cleanUpProcess != null) cleanUpProcess(_htmlDoc);
   }
 
@@ -273,42 +285,58 @@ class MyIFrame{//TODO(pappes) remove direct reference to window
         ..replaceAll('style', 'smile')
         ..replaceAll('position:', 'poison:')
         ..replaceAll('position%3A', 'poison%3A')
-        ..replaceAll('onclick', 'oncrick')
-        //..replaceAll('<style', '<!--')
-        //..replaceAll('</style>', '-->')
+        ..replaceAll('onclick', 'oncrick')//..replaceAll('<style', '<!--')
+    //..replaceAll('</style>', '-->')
     ;
   }
 
   /// Inserts an [IFrameElement] to the start of the document.
-  /// 
+  ///
   /// * [contents] can be either a URL or a HTML in a string
   /// * [cleanUpProcess] is an optional function that takes an [IFrameElement] and runs extra cleanup processing on it
-  _embedIFrameInBody(String contents, [void cleanUpProcess(dynamic parentNode)]) {
+  _embedIFrameInBody(String contents, [void cleanUpProcess(dynamic parentNode), String baseUrl]) {
     String fragment = '<iframe src=\'$contents\'>';
     fragment = _modifyHtmlToSanitise(fragment);
     Element iframeElement = MyHtml.createElementFromHTML(fragment);
+    iframeElement.querySelectorAll('*').forEach((Element e) => MyHtml.resolveElementUrl(e, baseUrl));
     if (cleanUpProcess != null) cleanUpProcess(iframeElement);
-    _htmlDoc.body.insertBefore(_htmlDoc.body.children.first, iframeElement);
+    //_htmlDoc.body.insertBefore(_htmlDoc.body.children.first, iframeElement);
+    _htmlDoc.body.append(iframeElement);
+  }
+
+  /// Opens the [url] in the current browser tab.
+  ///
+  /// * [url] is the site to open
+  /// * [cleanUpProcess] is an optional function that takes an [IFrameElement] and runs extra cleanup processing on it
+  _openIFrameInCurrentTab(String url, [void cleanUpProcess(dynamic parentNode)]) {
+    window.location.assign(url);
+    if (cleanUpProcess != null) cleanUpProcess(window.document);
   }
 
   /// Converts an IFrame from referenced to inline and inserts it into the DOM (if source is available)
-  /// or opens the IFrame in a new tab (if the source is not available)
-  _buildIFrameAsHtml(Element e, [void cleanUpProcess(dynamic parentNode)]) {
-    if (e.attributes['src'].contains('</html>')) {
-      _embedIFrameInBody(e.attributes['src'], cleanUpProcess);
+  /// or opens the IFrame in current tab (if the source is not available)
+  _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode)]) {
+    if (iFrameSource.contains('</html>')) {
+      _embedIFrameInBody(iFrameSource, cleanUpProcess);
     } else {
       //attempt to load external web site content
-      //TODO(pappes) redirect iFrame conents to be absolute addresses not relative
-      HttpRequest.request(e.attributes['src'])
-      .then((contents) => _embedIFrameInBody(' data:text/html,'+contents))
-      .catchError((e) => window.location.assign(e.attributes['src']));
+      HttpRequest.request(iFrameSource).then((contents) {
+        if (contents.readyState == HttpRequest.DONE) {
+          if (contents.status == 200) {
+            _embedIFrameInBody(' data:text/html,' + contents.responseText, cleanUpProcess, iFrameSource); 
+          } else {
+            _openIFrameInCurrentTab(iFrameSource);
+          }
+        }
+      }).catchError((e) {
+        _openIFrameInCurrentTab(iFrameSource);
+      });
     }
   }
-  
+
   ///saves [_iFrame] and containing [_htmlDoc] for later use
   MyIFrame(HtmlDocument this._htmlDoc, IFrameElement this._iFrame) {
   }
-  
 }
 
 
