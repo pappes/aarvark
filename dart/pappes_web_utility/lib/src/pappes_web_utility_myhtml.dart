@@ -223,7 +223,8 @@ class MyHtml {
     target.querySelectorAll('iframe').forEach((e) => _whitelistElementAndParents(e, elementsToBeDeleted));
     //whitelist all elements of type anchor that have text so the user can click on links but not buttons
     target.querySelectorAll('a').forEach((Element e) {
-      if (e.text != null) _whitelistElementAndParents(e, elementsToBeDeleted);
+      String txt = e.text;
+      if (ifNull(txt,'') != '' ) _whitelistElementAndParents(e, elementsToBeDeleted);
     });
     //destroy everything that remains
     elementsToBeDeleted.forEach((Element e) {
@@ -254,6 +255,7 @@ class MyHtml {
 class MyIFrame {//TODO(pappes) remove direct reference to window
   IFrameElement _iFrame;//TODO (pappes) inherit from IframeElement would be better
   HtmlDocument _htmlDoc;//TODO(pappes) get doc from IFrame would be better
+  String _iFrameHtml;
 
   /// Enhances the IFrame to make it more visible for the user.
   ///
@@ -272,9 +274,27 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
     }
     _buildIFrameAsHtml(iFrameSource, cleanUpProcess);
     _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
-      frame.remove(); //remove all iFrames from document body
+      if (frame.id!='iframe_rebuilt') frame.remove(); //remove all iFrames from document body
     });
     if (cleanUpProcess != null) cleanUpProcess(_htmlDoc);
+  }
+
+
+  /// Determines the HTML that is used to compose an iFrame.
+  /// 
+  /// if this was javascript you could do
+  ///    document.getElementById('frame').contentWindow.document.body.innerHTML
+  String getIFrameHtml() {
+    js.JsObject enative = new js.JsObject.fromBrowserObject(_iFrame);
+    return (enative['contentWindow']['document']['body']['innerHTML']);
+    /*
+    IFrameElement f = _iFrame;
+    Window w = _iFrame.contentWindow as Window;
+    WindowBase wb = _iFrame.contentWindow;
+    HtmlDocument hd = w.document as HtmlDocument;
+    Document d = w.document;
+    BodyElement hb = d.body;
+    return b.innerHtml;    */
   }
 
   /// Breaks tags and attributes commonly used for malicious activity.
@@ -295,7 +315,7 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * [contents] can be either a URL or a HTML in a string
   /// * [cleanUpProcess] is an optional function that takes an [IFrameElement] and runs extra cleanup processing on it
   _embedIFrameInBody(String contents, [void cleanUpProcess(dynamic parentNode), String baseUrl]) {
-    String fragment = '<iframe src=\'$contents\'>';
+    String fragment = '<iframe id=iframe_rebuilt src=\'$contents\'>';
     fragment = _modifyHtmlToSanitise(fragment);
     Element iframeElement = MyHtml.createElementFromHTML(fragment);
     iframeElement.querySelectorAll('*').forEach((Element e) => MyHtml.resolveElementUrl(e, baseUrl));
@@ -318,6 +338,8 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode)]) {
     if (iFrameSource.contains('</html>')) {
       _embedIFrameInBody(iFrameSource, cleanUpProcess);
+    } else if (ifNull(getIFrameHtml(),'') != '') {
+      _embedIFrameInBody(' data:text/html,' + getIFrameHtml(), cleanUpProcess, iFrameSource);
     } else {
       //attempt to load external web site content
       HttpRequest.request(iFrameSource).then((contents) {
