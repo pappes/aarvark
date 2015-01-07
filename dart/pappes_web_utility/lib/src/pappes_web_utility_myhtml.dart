@@ -162,8 +162,8 @@ class MyHtml {
   static resolveElementUrl(Element childElement, String baseUrl) {
     Uri baseUri = Uri.parse(baseUrl);
     childElement.attributes.forEach((attr, val) {
-      if (['src','href'].contains(attr)) val = baseUri.resolve(val).toString();
-    });    
+      if (['src', 'href'].contains(attr)) val = baseUri.resolve(val).toString();
+    });
   }
   /// Removes any element that obsures another element from [htmlDoc].
   ///
@@ -224,7 +224,7 @@ class MyHtml {
     //whitelist all elements of type anchor that have text so the user can click on links but not buttons
     target.querySelectorAll('a').forEach((Element e) {
       String txt = e.text;
-      if (ifNull(txt,'') != '' ) _whitelistElementAndParents(e, elementsToBeDeleted);
+      if (ifNull(txt, '') != '') _whitelistElementAndParents(e, elementsToBeDeleted);
     });
     //destroy everything that remains
     elementsToBeDeleted.forEach((Element e) {
@@ -266,35 +266,26 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * or [IFrameElement] (when the IFrame was inlined into the document)
   /// and runs extra cleanup processing on it
   makeProminant([void cleanUpProcess(dynamic parentNode)]) {
-    String iFrameSource;
-    if (_iFrame.attributes['src'].contains('</html>')) {
-      iFrameSource = _iFrame.attributes['src'];
-    } else {
-      iFrameSource = Uri.parse(window.location.href).resolve(_iFrame.attributes['src']).toString();
+    String iFrameSource = _iFrame.attributes['src'];
+    if (!iFrameSource.contains('</html>')) {
+      iFrameSource = Uri.parse(window.location.href).resolve(iFrameSource).toString();
     }
     _buildIFrameAsHtml(iFrameSource, cleanUpProcess);
     _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
-      if (frame.id!='iframe_rebuilt') frame.remove(); //remove all iFrames from document body
+      if (frame.id != 'iframe_rebuilt') frame.remove(); //remove all iFrames from document body
     });
     if (cleanUpProcess != null) cleanUpProcess(_htmlDoc);
   }
 
 
   /// Determines the HTML that is used to compose an iFrame.
-  /// 
+  ///
+  /// dart is tighter about cross domain access
   /// if this was javascript you could do
   ///    document.getElementById('frame').contentWindow.document.body.innerHTML
   String getIFrameHtml() {
-    js.JsObject enative = new js.JsObject.fromBrowserObject(_iFrame);
-    return (enative['contentWindow']['document']['body']['innerHTML']);
-    /*
-    IFrameElement f = _iFrame;
-    Window w = _iFrame.contentWindow as Window;
-    WindowBase wb = _iFrame.contentWindow;
-    HtmlDocument hd = w.document as HtmlDocument;
-    Document d = w.document;
-    BodyElement hb = d.body;
-    return b.innerHtml;    */
+    js.JsObject jsIFrame = new js.JsObject.fromBrowserObject(_iFrame);
+    return (jsIFrame['contentWindow']['document']['body']['innerHTML']);
   }
 
   /// Breaks tags and attributes commonly used for malicious activity.
@@ -320,8 +311,11 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
     Element iframeElement = MyHtml.createElementFromHTML(fragment);
     iframeElement.querySelectorAll('*').forEach((Element e) => MyHtml.resolveElementUrl(e, baseUrl));
     if (cleanUpProcess != null) cleanUpProcess(iframeElement);
-    //_htmlDoc.body.insertBefore(_htmlDoc.body.children.first, iframeElement);
-    _htmlDoc.body.append(iframeElement);
+    try {
+      _htmlDoc.body.insertBefore(iframeElement, _htmlDoc.body.children.first);
+    } catch (e) {
+      _htmlDoc.body.append(iframeElement);
+    }
   }
 
   /// Opens the [url] in the current browser tab.
@@ -338,14 +332,14 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode)]) {
     if (iFrameSource.contains('</html>')) {
       _embedIFrameInBody(iFrameSource, cleanUpProcess);
-    } else if (ifNull(getIFrameHtml(),'') != '') {
+    } else if (ifNull(getIFrameHtml(), '') != '') {
       _embedIFrameInBody(' data:text/html,' + getIFrameHtml(), cleanUpProcess, iFrameSource);
     } else {
       //attempt to load external web site content
       HttpRequest.request(iFrameSource).then((contents) {
         if (contents.readyState == HttpRequest.DONE) {
           if (contents.status == 200) {
-            _embedIFrameInBody(' data:text/html,' + contents.responseText, cleanUpProcess, iFrameSource); 
+            _embedIFrameInBody(' data:text/html,' + contents.responseText, cleanUpProcess, iFrameSource);
           } else {
             _openIFrameInCurrentTab(iFrameSource);
           }
