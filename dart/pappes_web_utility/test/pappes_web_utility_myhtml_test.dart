@@ -3,6 +3,7 @@
 
 library pappes_web_utility.MyHtml.test;
 
+import 'package:logging/logging.dart';
 import 'package:unittest/unittest.dart';
 import 'dart:html';
 import 'package:pappes_web_utility/pappes_web_utility.dart';
@@ -10,6 +11,11 @@ import 'package:pappes_web_utility/pappes_web_utility.dart';
 void main() => defineTests();
 
 void defineTests() {
+  
+  Logger.root.level = Level.WARNING;
+  Logger.root.onRecord.listen((LogRecord rec) {
+    print('${rec.level.name}: ${rec.time}: ${rec.message}');
+  });
 
   group('pappes_web_utility MyHtml tests for remove URI paramseters', () {
     test('no paramaters', () => expect(MyHtml.setUriParameters('http://www.abc.com'), 'http://www.abc.com'));

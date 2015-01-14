@@ -9,6 +9,7 @@ library pappes_web_utility.base;
 import 'dart:html';
 import 'dart:js' as js;
 import 'package:pappes_utility/pappes_utility.dart';
+import 'package:logging/logging.dart';
 
 part 'pappes_web_utility_myhtml.dart';
 part 'pappes_web_utility_myjs.dart';
@@ -36,3 +37,6 @@ String base64Decode(String val) {
 String base64Encode(String val) {
   return MyJS.btoa(val);
 }
+
+
+final Logger log = new Logger('pappes_web_utility');

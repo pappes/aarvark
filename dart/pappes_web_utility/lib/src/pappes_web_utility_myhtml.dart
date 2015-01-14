@@ -28,6 +28,7 @@ class MyHtml {
   ///    MyHtml.setUriParameters('http://www.abc.com?x=HelloWorld&a=b', searchFor: 'HelloWorld', replacementParameters: 'abc=123')
   static String setUriParameters(String originalUrl, {String searchFor, String replacementParameters}) {
     String finalUrl;
+    log.info('Function : setUriParameters, Parameters : {[originalUrl,$originalUrl ][searchFor,$searchFor ][replacementParameters,$replacementParameters ]}');
 
     Uri x = Uri.parse(originalUrl);
     if (searchFor == null || x.query.toLowerCase().contains(searchFor.toLowerCase())) {
@@ -39,6 +40,7 @@ class MyHtml {
              setUriParameters 
                   originalUrl: $originalUrl 
               became finalUrl: $finalUrl''');
+    log.fine('Function : setUriParameters, Return : $finalUrl');
     return finalUrl;
   }
 
@@ -52,6 +54,7 @@ class MyHtml {
   static String removeUrlRedirect(String originalUrl) {
     String finalUrl;
     String base64Uri;
+    log.info('Function : removeUrlRedirect, Parameters : {[originalUrl,$originalUrl ]}');
     final Map params = Uri.parse(originalUrl).queryParameters;
     if (params is Map) for (String param in params.values) {
       // we have a web address so use it now
@@ -70,6 +73,7 @@ class MyHtml {
             removeUrlRediriect 
                   originalUrl: $originalUrl 
               became finalUrl: $finalUrl''');
+    log.fine('Function : removeUrlRedirect, Return : $finalUrl');
     return finalUrl;
   }
 
@@ -78,25 +82,31 @@ class MyHtml {
   /// This is used to unsure that URLs that do not include the scheme
   /// are treated as absolute paths (not relative to the document URL).
   static String setUriSchemeToHttp(String originalURL) {
-    String finalURL;
+    String finalUrl;
     Uri parsedUri;
+    log.info('Function : setUriSchemeToHttp, Parameters : {[originalURL,$originalURL ]}');
     try {
       parsedUri = Uri.parse(originalURL);
       if (parsedUri.scheme == '') {
-        finalURL = parsedUri.replace(scheme: 'http', path: r'//' + parsedUri.path).toString();
+        finalUrl = parsedUri.replace(scheme: 'http', path: r'//' + parsedUri.path).toString();
         //the following line to to work around a bug in Darts URI library
-        finalURL = finalURL.replaceFirst(r'http:////', r'http://');
+        finalUrl = finalUrl.replaceFirst(r'http:////', r'http://');
       }
     } catch (e) { //invalid URLs to be passed back unmodified
     }
-    return ifNull(finalURL, originalURL);
+    finalUrl = ifNull(finalUrl, originalURL);
+    log.fine('Function : setUriSchemeToHttp, Return : $finalUrl');
+    return finalUrl;
   }
 
   /// Creates an HTML element from any valid [htmlFragment] of HTML.
   ///
   /// Does not have any of the normal security limitations.
   static Element createElementFromHTML(String htmlFragment) {
-    return new Element.html(htmlFragment, treeSanitizer: new _NonTreeSanitizer());
+    log.info('Function : createElementFromHTML, Parameters : {[htmlFragment,$htmlFragment]}');
+    Element e = new Element.html(htmlFragment, treeSanitizer: new _NonTreeSanitizer());
+    log.fine('Function : createElementFromHTML, Return : ${e.outerHtml}');    
+    return e;
   }
 
   /// Alters a specific [attribute] of a HTML [Element], [node]
@@ -115,10 +125,14 @@ class MyHtml {
   ///     alterAttribute(element, 'href', (url) => removeUrlRedirect(url)));
   ///
   static alterAttribute(Element node, String attribute, Object alter(Object a)) {
+    log.info('Function : alterAttribute, Parameters : {[node,$node][attribute,$attribute][alter,$alter]}');
     assert(alter is _MyHtml_Alter_Element);
     if (node.attributes.containsKey(attribute)) {
-      node.attributes[attribute] = alter(node.attributes[attribute]);
+      log.finer('Function : alterAttribute, old : ${node.attributes[attribute]}');   
+      node.attributes[attribute] = alter(node.attributes[attribute]); 
+      log.finer('Function : alterAttribute, new : ${node.attributes[attribute]}');   
     }
+    log.fine('Function : alterAttribute, Return : void');    
   }
 
   /// Applies a [process] to every element of a HTML [DOM] element
@@ -128,23 +142,32 @@ class MyHtml {
   ///
   ///    iterateHTMLDOM(document.body, (e) => printElement(e));
   static iterateHTMLDOM(Element DOM, void process(Element e)) {
+    log.info('Function : iterateHTMLDOM, Parameters : {[DOM , $DOM][process , $process]}');
     assert(process is _MyHtml_Element_Process);
     if (DOM.hasChildNodes()) DOM.children.forEach((child) => iterateHTMLDOM(child, process));
+    log.finest('Function : iterateHTMLDOM, old : ${DOM.outerHtml}');   
     process(DOM);
+    log.finest('Function : iterateHTMLDOM, new : ${DOM.outerHtml}');  
+    log.fine('Function : iterateHTMLDOM, Return : void');     
   }
 
   /// Removes all script tags from [htmlDoc].
   static removeAllScripts(HtmlDocument htmlDoc) {
+    log.info('Function : removeAllScripts, Parameters : {[htmlDoc,$htmlDoc]}');
     htmlDoc.querySelectorAll('script').forEach((Element e) {
+      log.finest('Function : removeAllScripts, removed : ${e.outerHtml}');   
       e.remove();
     });
+    log.fine('Function : removeAllScripts, Return : void');     
   }
 
   /// Removes all event handlers from all elements on the browser DOM.
   static void removeAllHandlers(HtmlDocument htmlDoc) {
     //clone the items in the body to sever any event handlers
+    log.info('Function : removeAllHandlers, Parameters : {[htmlDoc,$htmlDoc]}');
     htmlDoc.body.children.toSet().forEach((Element e) => e.replaceWith(e.clone(true)));
     MyJS.removeAllTimers();
+    log.fine('Function : removeAllHandlers, Return : void');   
   }
 
   /// Changes the target of all <a> anchor href elementsin [htmlDoc].
@@ -152,7 +175,13 @@ class MyHtml {
   /// * Default [target] is '_blank' (new tab)
   /// * Valid values for [target] are '_blank', '_self', '_parent', '_top', or _framename_
   static retargetAllHrefs(HtmlDocument htmlDoc, [String target = '_blank']) {
-    htmlDoc.querySelectorAll('a').forEach((Element e) => e.attributes['target'] = target);
+    log.info('Function : retargetAllHrefs, Parameters : {[htmlDoc,$htmlDoc][target,$target]}');
+    htmlDoc.querySelectorAll('a').forEach((Element e) {
+      log.finest('Function : retargetAllHrefs, old : ${e.attributes['target']}');   
+      e.attributes['target'] = target;
+      log.finest('Function : retargetAllHrefs, new : ${e.attributes['target']}');   
+    });
+    log.fine('Function : retargetAllHrefs, Return : void'); 
   }
 
   /// Converts src and href attributes to be absolute URL's.
@@ -160,10 +189,16 @@ class MyHtml {
   /// * [childElement] the <img>, <iframe>, <a>, <object> or other element that has an external reference
   /// * [baseUrl] the parent URL to use for resolving
   static resolveElementUrl(Element childElement, String baseUrl) {
+    log.info('Function : resolveElementUrl, Parameters : {[childElement,$childElement][baseUrl,$baseUrl]}');
     Uri baseUri = Uri.parse(baseUrl);
     childElement.attributes.forEach((attr, val) {
-      if (['src', 'href'].contains(attr)) val = baseUri.resolve(val).toString();
+      if (['src', 'href'].contains(attr)) {
+        log.finest('Function : resolveElementUrl, old : $val');  
+        val = baseUri.resolve(val).toString();
+        log.finest('Function : resolveElementUrl, new : $val');   
+      }
     });
+    log.fine('Function : resolveElementUrl, Return : void'); 
   }
   /// Removes any element that obsures another element from [htmlDoc].
   ///
@@ -181,17 +216,22 @@ class MyHtml {
   ///
   ///    removeAllOverlays(document);
   static removeAllOverlays(HtmlDocument htmlDoc) {
+    log.info('Function : removeAllOverlays, Parameters : {[htmlDoc,$htmlDoc]}');
     _stripDownPage(htmlDoc);
     ElementList iFrames = htmlDoc.querySelectorAll('iframe');
     if (iFrames != null) {
       iFrames.toList().sort(_compareElementWidth);
       new MyIFrame(htmlDoc, iFrames.last).makeProminant(_stripDownPage);
     }
+    log.fine('Function : removeAllOverlays, Return : void'); 
   }
 
   /// Impliments Comparator to allow sorting [Element]s based on ClientWidth;
   static int _compareElementWidth(Element a, Element b) {
-    return a.clientWidth < b.clientWidth ? -1 : 1;
+    log.info('Function : _compareElementWidth, Parameters : {[a,$a][b,$b]}');
+    int comparison = a.clientWidth < b.clientWidth ? -1 : 1;
+    log.fine('Function : _compareElementWidth, Return : comparison'); 
+    return comparison;
   }
 
   /// Remove unwanted HTML [Element] tags from a [HtmlDocument] or [ParentNode]
@@ -205,6 +245,7 @@ class MyHtml {
   ///
   ///    _stripDownPage(document);
   static _stripDownPage(target) {
+    log.info('Function : _stripDownPage, Parameters : {[target,$target]}');
     //internal recursive function
     void _whitelistElementAndParents(Element e, Set s) {
       if (e.parent != null) _whitelistElementAndParents(e.parent, s);
@@ -228,11 +269,13 @@ class MyHtml {
     });
     //destroy everything that remains
     elementsToBeDeleted.forEach((Element e) {
+      log.finest('Function : _stripDownPage, remove : $e'); 
       e.remove();
     });
     if (target is HtmlDocument) {
       removeAllHandlers(target);
     }
+    log.fine('Function : _stripDownPage, Return : void'); 
   }
 
 
@@ -266,15 +309,20 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * or [IFrameElement] (when the IFrame was inlined into the document)
   /// and runs extra cleanup processing on it
   makeProminant([void cleanUpProcess(dynamic parentNode)]) {
+    log.info('Function : makeProminant, Parameters : {[cleanUpProcess,$cleanUpProcess]}');
     String iFrameSource = _iFrame.attributes['src'];
     if (!iFrameSource.contains('</html>')) {
       iFrameSource = Uri.parse(window.location.href).resolve(iFrameSource).toString();
     }
     _buildIFrameAsHtml(iFrameSource, cleanUpProcess);
     _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
-      if (frame.id != 'iframe_rebuilt') frame.remove(); //remove all iFrames from document body
+      if (frame.id != 'iframe_rebuilt') {
+        log.finest('Function : _stripDownPage, remove : $frame'); 
+        frame.remove(); //remove all iFrames from document body
+      }
     });
     if (cleanUpProcess != null) cleanUpProcess(_htmlDoc);
+    log.fine('Function : makeProminant, Return : void'); 
   }
 
 
@@ -284,13 +332,17 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// if this was javascript you could do
   ///    document.getElementById('frame').contentWindow.document.body.innerHTML
   String getIFrameHtml() {
+    log.info('Function : getIFrameHtml, Parameters : {}');
     js.JsObject jsIFrame = new js.JsObject.fromBrowserObject(_iFrame);
-    return (jsIFrame['contentWindow']['document']['body']['innerHTML']);
+    String innerHtml = jsIFrame['contentWindow']['document']['body']['innerHTML'];
+    log.fine('Function : getIFrameHtml, Return : $innerHtml'); 
+    return (innerHtml);
   }
 
   /// Breaks tags and attributes commonly used for malicious activity.
   String _modifyHtmlToSanitise(String originalHtml) {
-    return originalHtml
+    log.info('Function : _modifyHtmlToSanitise, Parameters : {[originalHtml,$originalHtml]}');
+    String retval = originalHtml
         ..replaceAll('class', 'crass')
         ..replaceAll('setTimeout', 'dontSetTimeout')
         ..replaceAll('style', 'smile')
@@ -299,6 +351,8 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
         ..replaceAll('onclick', 'oncrick')//..replaceAll('<style', '<!--')
     //..replaceAll('</style>', '-->')
     ;
+    log.fine('Function : _modifyHtmlToSanitise, Return : $retval'); 
+    return retval;
   }
 
   /// Inserts an [IFrameElement] to the start of the document.
@@ -306,16 +360,20 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * [contents] can be either a URL or a HTML in a string
   /// * [cleanUpProcess] is an optional function that takes an [IFrameElement] and runs extra cleanup processing on it
   _embedIFrameInBody(String contents, [void cleanUpProcess(dynamic parentNode), String baseUrl]) {
+    log.info('Function : _embedIFrameInBody, Parameters : {[contents,$contents][cleanUpProcess,$cleanUpProcess][baseUrl,$baseUrl]}');
     String fragment = '<iframe id=iframe_rebuilt src=\'$contents\'>';
     fragment = _modifyHtmlToSanitise(fragment);
     Element iframeElement = MyHtml.createElementFromHTML(fragment);
     iframeElement.querySelectorAll('*').forEach((Element e) => MyHtml.resolveElementUrl(e, baseUrl));
     if (cleanUpProcess != null) cleanUpProcess(iframeElement);
     try {
+      log.finer('Function : _embedIFrameInBody, insertBefore : [Value,${iframeElement.outerHtml}][AheadOf,${_htmlDoc.body.children.first.outerHtml}]'); 
       _htmlDoc.body.insertBefore(iframeElement, _htmlDoc.body.children.first);
     } catch (e) {
+      log.finer('Function : _embedIFrameInBody, append : ${iframeElement.outerHtml}'); 
       _htmlDoc.body.append(iframeElement);
     }
+    log.fine('Function : _embedIFrameInBody, Return : void'); 
   }
 
   /// Opens the [url] in the current browser tab.
@@ -323,13 +381,16 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * [url] is the site to open
   /// * [cleanUpProcess] is an optional function that takes an [IFrameElement] and runs extra cleanup processing on it
   _openIFrameInCurrentTab(String url, [void cleanUpProcess(dynamic parentNode)]) {
+    log.info('Function : _openIFrameInCurrentTab, Parameters : {[url,$url][cleanUpProcess,$cleanUpProcess]}');
     window.location.assign(url);
     if (cleanUpProcess != null) cleanUpProcess(window.document);
+    log.fine('Function : _openIFrameInCurrentTab, Return : void'); 
   }
 
   /// Converts an IFrame from referenced to inline and inserts it into the DOM (if source is available)
   /// or opens the IFrame in current tab (if the source is not available)
   _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode)]) {
+    log.info('Function : _buildIFrameAsHtml, Parameters : {[iFrameSource,$iFrameSource][cleanUpProcess,$cleanUpProcess]}');
     if (iFrameSource.contains('</html>')) {
       _embedIFrameInBody(iFrameSource, cleanUpProcess);
     } else if (ifNull(getIFrameHtml(), '') != '') {
@@ -337,6 +398,7 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
     } else {
       //attempt to load external web site content
       HttpRequest.request(iFrameSource).then((contents) {
+        log.finest('Function : _buildIFrameAsHtml, HttpRequest.request.contents__(4,200)__ : {[readyState,${contents.readyState}][status,!{contents.status}]}'); 
         if (contents.readyState == HttpRequest.DONE) {
           if (contents.status == 200) {
             _embedIFrameInBody(' data:text/html,' + contents.responseText, cleanUpProcess, iFrameSource);
@@ -345,9 +407,11 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
           }
         }
       }).catchError((e) {
+        log.fine('Function : _buildIFrameAsHtml, HttpRequest.request.catchError',e); 
         _openIFrameInCurrentTab(iFrameSource);
       });
     }
+    log.fine('Function : _buildIFrameAsHtml, Return : void'); 
   }
 
   ///saves [_iFrame] and containing [_htmlDoc] for later use
