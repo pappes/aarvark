@@ -20,6 +20,7 @@ void defineTests() {
     test('test runAnyJavaScript string concatenation', () {
       expect(MyJS.runAnyJavaScript('"1"+"2"'), '12');
     });
+    //this test is sucessfull if the alert does not show, because all timers were killed by the test
     print( 'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing MyJS: timer created 3 seconds ago!!!!   MyJS.removeAllTimers should have stopped this message from appearing."); }, 3000);')}');
     test('test removeAllTimers', () {
       expect(MyJS.removeAllTimers(), isNull);
