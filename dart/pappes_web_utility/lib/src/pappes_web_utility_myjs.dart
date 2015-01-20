@@ -40,6 +40,7 @@ class MyJS {
   ///   MyJS.runAnyJavaScript('console.log(" 1 + 2 = " + (1+2));');//returns null, logs: 1 + 2 = 3
   ///   
   static Object runAnyJavaScript(String command) {
+    dynamic retObject;
     bool jsHasEval;
     try {
       jsHasEval = js.context.hasProperty('eval');
@@ -47,7 +48,8 @@ class MyJS {
       throw (new StateError('Dart -> JavaScript interop not initialised.  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);  Original error: $e'));
     }
     if (jsHasEval) {
-      return js.context.callMethod('eval', ["$command"]);
+      retObject = js.context.callMethod('eval', ["$command"]);
+      return retObject;
     }
     throw (new StateError('Dart -> JavaScript interop not accepting calls to eval().  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);'));
   }
