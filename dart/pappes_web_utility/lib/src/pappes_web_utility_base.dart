@@ -39,4 +39,4 @@ String base64Encode(String val) {
 }
 
 
-final Logger log = new Logger('pappes_web_utility');
+final Logger log = new Logger('pappes.pappes_web_utility');

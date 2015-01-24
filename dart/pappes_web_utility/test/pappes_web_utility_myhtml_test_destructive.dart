@@ -3,7 +3,6 @@
 
 library pappes_web_utility.MyHtml.dest.test;
 
-import 'package:logging/logging.dart';
 import 'package:unittest/unittest.dart';
 import 'dart:html';
 import 'package:pappes_web_utility/pappes_web_utility.dart';
@@ -12,12 +11,6 @@ void main() => defineTests();
 
 void defineTests() {
   
-  Logger.root.level = Level.WARNING;
-  Logger.root.onRecord.listen((LogRecord rec) {
-    print('${rec.level.name}: ${rec.time}: ${rec.message}');
-  });
-
-
   group('pappes_web_utility MyHtml removeAllOverlays tests initial HTML state', () {
     test('element_p', () => expect(document.querySelector('#outside_p').attributes['id'], 'outside_p'));
     test('element_a_text', () => expect(document.querySelector('#outside_anchor_text').attributes['id'], 'outside_anchor_text'));
