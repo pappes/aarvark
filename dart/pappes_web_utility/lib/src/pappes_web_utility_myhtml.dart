@@ -36,10 +36,6 @@ class MyHtml {
     }
     finalUrl = x.toString();
 
-    if (RamCache.recall('loglevel') == '[INFO]') print('''
-             setUriParameters 
-                  originalUrl: $originalUrl 
-              became finalUrl: $finalUrl''');
     log.fine('Function : setUriParameters, Return : $finalUrl');
     return finalUrl;
   }
@@ -69,10 +65,6 @@ class MyHtml {
     }
     finalUrl = setUriSchemeToHttp(ifNull(finalUrl, base64Uri));
     finalUrl = ifNull(finalUrl, originalUrl);
-    if (RamCache.recall('loglevel') == '[INFO]') print('''
-            removeUrlRediriect 
-                  originalUrl: $originalUrl 
-              became finalUrl: $finalUrl''');
     log.fine('Function : removeUrlRedirect, Return : $finalUrl');
     return finalUrl;
   }

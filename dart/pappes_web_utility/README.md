@@ -5,11 +5,6 @@ A library for Pappes.  Others might find it useful
 ## Usage
 
 TODO:
-*fix up this readme
-** remove HTML overlay pagess
-**publish
-*link to this libary from bookmarklets
-* check out https://github.com/karan/validator.dart
 A simple usage example:
 
     import 'package:pappes_web_utility/pappes_web_utility.dart';

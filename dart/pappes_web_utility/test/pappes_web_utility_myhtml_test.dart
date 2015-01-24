@@ -221,6 +221,6 @@ void defineTests() {
     test('element_a_text', () => expect(document.querySelector('#inside_anchor_text'), isNull));
     test('element_a_blank', () => expect(document.querySelector('#inside_anchor_button'), isNull));
     test('element_frame', () => expect(document.querySelector('#inside_frame_a'), isNull));
-  });
+  });//destructive test move to seperate file
 
 }
