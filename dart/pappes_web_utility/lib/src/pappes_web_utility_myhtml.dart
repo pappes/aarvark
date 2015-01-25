@@ -207,13 +207,13 @@ class MyHtml {
   /// and keep all elements that are parents of these elements
   ///
   ///    removeAllOverlays(document);
-  static removeAllOverlays(HtmlDocument htmlDoc) {
-    log.info('Function : removeAllOverlays, Parameters : {[htmlDoc,$htmlDoc]}');
+  static removeAllOverlays(HtmlDocument htmlDoc, [bool allowRedirect = true]) {
+    log.info('Function : removeAllOverlays, Parameters : {[htmlDoc,$htmlDoc], [allowRedirect,$allowRedirect]}');
     _stripDownPage(htmlDoc);
     ElementList iFrames = htmlDoc.querySelectorAll('iframe');
     if (iFrames != null) {
-      iFrames.toList().sort(_compareElementWidth);
-      new MyIFrame(htmlDoc, iFrames.last).makeProminant(_stripDownPage);
+      iFrames.sort(_compareElementWidth);
+      new MyIFrame(htmlDoc, iFrames.last).makeProminant(_stripDownPage, allowRedirect);
     }
     log.fine('Function : removeAllOverlays, Return : void'); 
   }
@@ -221,11 +221,12 @@ class MyHtml {
   /// Impliments Comparator to allow sorting [Element]s based on ClientWidth;
   static int _compareElementWidth(Element a, Element b) {
     log.info('Function : _compareElementWidth, Parameters : {[a,$a][b,$b]}');
+    log.fine('a.width=${a.clientWidth} b.width=${b.clientWidth}');
     int comparison;
     if (a.clientWidth < b.clientWidth) comparison = -1;
     else if (a.clientWidth == b.clientWidth)  comparison = 0;
     else comparison = 1;
-    log.fine('Function : _compareElementWidth, Return : comparison'); 
+    log.fine('Function : _compareElementWidth, Return : $comparison'); 
     return comparison;
   }
 
@@ -303,13 +304,13 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// * a [HtmlDocument] (when the IFrame was loaded in the tab)
   /// * or [IFrameElement] (when the IFrame was inlined into the document)
   /// and runs extra cleanup processing on it
-  makeProminant([void cleanUpProcess(dynamic parentNode)]) {
-    log.info('Function : makeProminant, Parameters : {[cleanUpProcess,$cleanUpProcess]}');
+  makeProminant([void cleanUpProcess(dynamic parentNode), bool allowRedirect = true]) {
+    log.info('Function : makeProminant, Parameters : {[cleanUpProcess,$cleanUpProcess], [allowRedirect,$allowRedirect]}');
     String iFrameSource = _iFrame.attributes['src'];
     if (!iFrameSource.contains('</html>')) {
       iFrameSource = Uri.parse(window.location.href).resolve(iFrameSource).toString();
     }
-    _buildIFrameAsHtml(iFrameSource, cleanUpProcess);
+    _buildIFrameAsHtml(iFrameSource, cleanUpProcess, allowRedirect);
     _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
       if (frame.id != 'iframe_rebuilt') {
         log.finest('Function : _stripDownPage, remove : $frame'); 
@@ -384,8 +385,8 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
 
   /// Converts an IFrame from referenced to inline and inserts it into the DOM (if source is available)
   /// or opens the IFrame in current tab (if the source is not available)
-  _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode)]) {
-    log.info('Function : _buildIFrameAsHtml, Parameters : {[iFrameSource,$iFrameSource][cleanUpProcess,$cleanUpProcess]}');
+  _buildIFrameAsHtml(String iFrameSource, [void cleanUpProcess(dynamic parentNode), bool allowRedirect = true]) {
+    log.info('Function : _buildIFrameAsHtml, Parameters : {[iFrameSource,$iFrameSource][cleanUpProcess,$cleanUpProcess], [allowRedirect,$allowRedirect]}');
     if (iFrameSource.contains('</html>')) {
       _embedIFrameInBody(iFrameSource, cleanUpProcess);
     } else if (ifNull(getIFrameHtml(), '') != '') {
@@ -398,12 +399,12 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
           if (contents.status == 200) {
             _embedIFrameInBody(' data:text/html,' + contents.responseText, cleanUpProcess, iFrameSource);
           } else {
-            _openIFrameInCurrentTab(iFrameSource);
+            if (allowRedirect) _openIFrameInCurrentTab(iFrameSource);
           }
         }
       }).catchError((e) {
         log.fine('Function : _buildIFrameAsHtml, HttpRequest.request.catchError',e); 
-        _openIFrameInCurrentTab(iFrameSource);
+        if (allowRedirect) _openIFrameInCurrentTab(iFrameSource);
       });
     }
     log.fine('Function : _buildIFrameAsHtml, Return : void'); 
