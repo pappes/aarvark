@@ -1,6 +1,8 @@
 # Changelog
 
 ## 0.0.3+1
+fix bug about removing last iFram when not redirecting in removeAllOverlays
+## 0.0.3+1
 fix bug about trying to sort unsortable ElementList in removeAllOverlays
 
 ## 0.0.3
