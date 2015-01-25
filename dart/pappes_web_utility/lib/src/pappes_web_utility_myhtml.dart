@@ -314,8 +314,9 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
     }
     _buildIFrameAsHtml(iFrameSource, cleanUpProcess, allowRedirect);
     _htmlDoc.querySelectorAll('iframe').forEach((Element frame) {
-      if (frame.id != 'iframe_rebuilt') {
-        log.finest('Function : _stripDownPage, remove : $frame'); 
+      if (frame.id != 'iframe_rebuilt' ||
+          (!allowRedirect && iFrameSource == frame.attributes['src'])) {
+        log.finest('Function : makeProminant, remove : $frame'); 
         frame.remove(); //remove all iFrames from document body
       }
     });
