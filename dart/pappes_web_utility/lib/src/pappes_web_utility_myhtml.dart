@@ -210,10 +210,12 @@ class MyHtml {
   static removeAllOverlays(HtmlDocument htmlDoc, [bool allowRedirect = true]) {
     log.info('Function : removeAllOverlays, Parameters : {[htmlDoc,$htmlDoc], [allowRedirect,$allowRedirect]}');
     _stripDownPage(htmlDoc);
-    ElementList iFrames = htmlDoc.querySelectorAll('iframe');
+    ElementList iFrames = htmlDoc.querySelectorAll('iframe');    
     if (iFrames != null) {
-      iFrames.sort(_compareElementWidth);
-      new MyIFrame(htmlDoc, iFrames.last).makeProminant(_stripDownPage, allowRedirect);
+      List iFramesSortable;
+      iFramesSortable = iFrames.toList();
+      iFramesSortable.sort(_compareElementWidth);
+      new MyIFrame(htmlDoc, iFramesSortable.last).makeProminant(_stripDownPage, allowRedirect);
     }
     log.fine('Function : removeAllOverlays, Return : void'); 
   }

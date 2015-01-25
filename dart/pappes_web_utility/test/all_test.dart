@@ -15,7 +15,7 @@ main() {
   final destructiveCapability = {'SAFE':1,'DESTRUCTIVE':2,'VERYDESTRUCTIVE':3}; 
   int destructiveLevel;
   destructiveLevel = destructiveCapability['SAFE'];
-  //destructiveLevel = destructiveCapability['DESTRUCTIVE'];
+  destructiveLevel = destructiveCapability['DESTRUCTIVE'];
   //destructiveLevel = destructiveCapability['VERYDESTRUCTIVE'];//uncomment if destructive testing is required
   
 
