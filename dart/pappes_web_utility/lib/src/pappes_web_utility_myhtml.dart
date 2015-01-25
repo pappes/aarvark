@@ -221,7 +221,10 @@ class MyHtml {
   /// Impliments Comparator to allow sorting [Element]s based on ClientWidth;
   static int _compareElementWidth(Element a, Element b) {
     log.info('Function : _compareElementWidth, Parameters : {[a,$a][b,$b]}');
-    int comparison = a.clientWidth < b.clientWidth ? -1 : 1;
+    int comparison;
+    if (a.clientWidth < b.clientWidth) comparison = -1;
+    else if (a.clientWidth == b.clientWidth)  comparison = 0;
+    else comparison = 1;
     log.fine('Function : _compareElementWidth, Return : comparison'); 
     return comparison;
   }
