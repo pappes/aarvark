@@ -283,7 +283,7 @@ class MyHtml {
       log.finest(
           'Function : removeAllOverlays, selected : ${selected} '
               '(width ${selected.clientWidth}) (height ${selected.clientHeight})');
-      if (selected.className == 'iframe') {
+      if (selected.nodeName.toLowerCase() == 'iframe') {
         new MyIFrame(
             htmlDoc,
             pageElements.last).makeProminant(stripDownPage, allowRedirect);
