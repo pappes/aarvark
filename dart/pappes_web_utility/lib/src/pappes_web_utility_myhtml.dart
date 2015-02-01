@@ -181,10 +181,23 @@ class MyHtml {
     log.fine('Function : iterateHTMLDOM, Return : void');
   }
 
-  /// Removes all script tags from [htmlDoc].
+  /// Determines if e if a friendly script [e].
+  static bool _whitelistScripts(Element e) {
+    log.info('Function : _whitelistScripts, Parameters : {[e,$e]}');
+    bool retVal = false;
+    String src = ifNull(e.outerHtml, '').toLowerCase();
+    if (src.contains('swf') || 
+        src.contains('devtools')) 
+      retVal=true;    
+    log.fine('Function : _whitelistScripts, Return : $retVal');
+    return retVal;
+  }
+
+  /// Removes suspect script tags from [htmlDoc].
   static removeAllScripts(HtmlDocument htmlDoc) {
     log.info('Function : removeAllScripts, Parameters : {[htmlDoc,$htmlDoc]}');
-    htmlDoc.querySelectorAll('script').forEach((Element e) {
+    htmlDoc.querySelectorAll('script').where((e) => 
+        _whitelistScripts(e) == false).forEach((Element e) {
       log.finest('Function : removeAllScripts, removed : ${e.outerHtml}');
       e.remove();
     });
@@ -325,25 +338,24 @@ class MyHtml {
       _whitelistElementAndParents(selected, elementsToBeDeleted);
     } else {
       //whitelist all elements of type input so that the user can still search
-      target.querySelectorAll(
-          'input').forEach((e) => _whitelistElementAndParents(e, elementsToBeDeleted));
       //whitelist all elements of type object so the user can watch videos
-      target.querySelectorAll(
-          'object').forEach((e) => _whitelistElementAndParents(e, elementsToBeDeleted));
       //whitelist all elements of type video so the user can watch videos
-      target.querySelectorAll(
-          'video').forEach((e) => _whitelistElementAndParents(e, elementsToBeDeleted));
-
-          //whitelist all elements of type iframe so that external content can remain
-      target.querySelectorAll(
-          'iframe').forEach((e) => _whitelistElementAndParents(e, elementsToBeDeleted));
+      //whitelist all elements of type iframe so that external content can remain
+      target.querySelectorAll('input, object, iframe, video').forEach((e) => 
+          _whitelistElementAndParents(e, elementsToBeDeleted));
 
       //whitelist all elements of type anchor that have text
       //so the user can click on links but not buttons
       target.querySelectorAll('a').forEach((Element e) {
-        String txt = e.text;
-        if (ifNull(txt, '') !=
-            '') _whitelistElementAndParents(e, elementsToBeDeleted);
+        String txt = ifNull(e.text, '');
+        if (txt != '') _whitelistElementAndParents(e, elementsToBeDeleted);
+      });
+
+      //whitelist all elements of type script that have reference "swf" or "devtools"
+      //so that falsh can be dynamically loaded
+      target.querySelectorAll('script').where((e) => 
+          _whitelistScripts(e)).forEach((Element e) {
+          _whitelistElementAndParents(e, elementsToBeDeleted);
       });
     }
     //destroy everything that remains
