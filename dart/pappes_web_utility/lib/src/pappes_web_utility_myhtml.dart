@@ -187,7 +187,8 @@ class MyHtml {
     bool retVal = false;
     String src = ifNull(e.outerHtml, '').toLowerCase();
     if (src.contains('swf') || 
-        src.contains('devtools')) 
+        src.contains('devtool') || 
+        src.contains('devobj')) 
       retVal=true;    
     log.fine('Function : _whitelistScripts, Return : $retVal');
     return retVal;
@@ -204,12 +205,21 @@ class MyHtml {
     log.fine('Function : removeAllScripts, Return : void');
   }
 
-  /// Removes all event handlers from all elements on the browser DOM.
-  static void removeAllHandlers(HtmlDocument htmlDoc) {
+  /// Removes event handlers from individual elements 
+  static void removeEventHandler(Element e) {
     //clone the items in the body to sever any event handlers
-    log.info('Function : removeAllHandlers, Parameters : {[htmlDoc,$htmlDoc]}');
-    htmlDoc.body.children.toSet().forEach(
-        (Element e) => e.replaceWith(e.clone(true)));
+    log.info('Function : removeEventHandler, Parameters : {[e,$e]}');
+    if (e.nodeName.toLowerCase() != 'script') 
+        e.replaceWith(e.clone(true));
+    log.fine('Function : removeEventHandler, Return : void');
+  }
+  /// Removes all event handlers from all elements except [selected] 
+  /// on the browser DOM.
+  static void removeAllHandlers(HtmlDocument htmlDoc, [HtmlElement selected = null]) {
+    //clone the items in the body to sever any event handlers
+    log.info('Function : removeAllHandlers, '
+        'Parameters : {[htmlDoc,$htmlDoc][selected,$selected]}');
+    htmlDoc.body.children.where((e) => e != selected).toSet().forEach(removeEventHandler);
     MyJS.removeAllTimers();
     log.fine('Function : removeAllHandlers, Return : void');
   }
@@ -287,7 +297,6 @@ class MyHtml {
         'Function : removeAllOverlays, '
             'Parameters : {[htmlDoc,$htmlDoc], [allowRedirect,$allowRedirect]}');
     List pageElements = [];
-    stripDownPage(htmlDoc);
     pageElements.addAll(htmlDoc.querySelectorAll('iframe'));
     pageElements.addAll(htmlDoc.querySelectorAll('object'));
     pageElements.sort(_compareElementArea);
@@ -350,21 +359,21 @@ class MyHtml {
         String txt = ifNull(e.text, '');
         if (txt != '') _whitelistElementAndParents(e, elementsToBeDeleted);
       });
-
-      //whitelist all elements of type script that have reference "swf" or "devtools"
-      //so that falsh can be dynamically loaded
-      target.querySelectorAll('script').where((e) => 
-          _whitelistScripts(e)).forEach((Element e) {
-          _whitelistElementAndParents(e, elementsToBeDeleted);
-      });
     }
+
+    //whitelist all scriopts which are known to be useful
+    //so that flash can be dynamically loaded
+    target.querySelectorAll('script').where((e) => 
+        _whitelistScripts(e)).forEach((Element e) {
+        _whitelistElementAndParents(e, elementsToBeDeleted);
+    });
     //destroy everything that remains
     elementsToBeDeleted.forEach((Element e) {
       log.finest('Function : _stripDownPage, remove : $e');
       e.remove();
     });
     if (target is HtmlDocument) {
-      removeAllHandlers(target);
+      removeAllHandlers(target, selected);
     }
     log.fine('Function : _stripDownPage, Return : void');
   }
