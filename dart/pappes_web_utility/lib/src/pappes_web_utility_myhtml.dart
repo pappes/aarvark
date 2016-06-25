@@ -15,7 +15,7 @@ typedef void _MyHtml_Element_Process(Element e);
 typedef Object _MyHtml_Alter_Element(Object e);
 
 class MyHtml {
-  //implimented as a singleton as all instances would behave the same anyway
+  //implemented as a singleton as all instances would behave the same anyway
   static final _singleton = new MyHtml._initialise();
 
 
@@ -224,7 +224,7 @@ class MyHtml {
     log.fine('Function : removeAllHandlers, Return : void');
   }
 
-  /// Changes the target of all <a> anchor href elementsin [htmlDoc].
+  /// Changes the target of all <a> anchor href elements in [htmlDoc].
   ///
   /// * Default [target] is '_blank' (new tab)
   /// * Valid values for [target] are
@@ -271,7 +271,7 @@ class MyHtml {
     });
     log.fine('Function : resolveElementUrl, Return : void');
   }
-  /// Removes any element that obsures another element from [htmlDoc].
+  /// Removes any element that obscures another element from [htmlDoc].
   ///
   /// If there is an iFrame or object on the page, finds the largest one and:
   /// * if it is an iFrame referencing another page and source is available,
@@ -361,7 +361,7 @@ class MyHtml {
       });
     }
 
-    //whitelist all scriopts which are known to be useful
+    //whitelist all scripts which are known to be useful
     //so that flash can be dynamically loaded
     target.querySelectorAll('script').where((e) => 
         _whitelistScripts(e)).forEach((Element e) {
@@ -378,7 +378,7 @@ class MyHtml {
     log.fine('Function : _stripDownPage, Return : void');
   }
 
-  /// Impliments Comparator to allow sorting [Element]s based on ClientWidth;
+  /// Implements Comparator to allow sorting [Element]s based on ClientWidth;
   static int _compareElementArea(Element a, Element b) {
     log.info('Function : _compareElementArea, Parameters : {[a,$a][b,$b]}');
     log.fine(
@@ -400,9 +400,9 @@ class MyHtml {
     s.remove(e);
   }
 
-  ///Returns an exisiting singleton.
+  ///Returns an existing singleton.
   ///
-  ///Constructor as invoked by external instanciations.
+  ///Constructor as invoked by external instantiations.
   factory MyHtml() {
     return _singleton;
   }
@@ -578,7 +578,7 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
 
 
 
-///implimentation of NodeTreeSanitizer that allows the HTML to contain anything.
+///implementation of NodeTreeSanitizer that allows the HTML to contain anything.
 ///Used to build unsafe iframes.
 class _NonTreeSanitizer implements NodeTreeSanitizer {
   void sanitizeTree(Node node) {

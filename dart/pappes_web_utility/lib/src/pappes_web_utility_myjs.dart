@@ -103,9 +103,9 @@ class MyJS {
   }
 
 
-  ///Returns an exisiting singleton.
+  ///Returns an existing singleton.
   ///
-  ///Constructor as invoked by external instanciations.
+  ///Constructor as invoked by external instantiations.
   factory MyJS() {
     return _singleton;
   }
