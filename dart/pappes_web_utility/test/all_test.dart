@@ -3,6 +3,7 @@
 
 library pappes_web_utility.test;
 
+import 'package:test/test.dart' as test;
 import 'package:logging/logging.dart' as logging;
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 import 'pappes_web_utility_myjs_test.dart' as MyJS_test;

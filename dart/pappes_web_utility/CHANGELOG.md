@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.0.3+6, +7
+extend setUriParameters and removeUrlRedirect to be aware of relative URLs
 ## 0.0.3+2, +3, +4
 fix bug about removing last iFrame when not redirecting in removeAllOverlays
 ## 0.0.3+1

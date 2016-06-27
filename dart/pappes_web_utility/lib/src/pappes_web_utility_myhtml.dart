@@ -90,7 +90,7 @@ class MyHtml {
 
   /// Changes [originalURL] to use the http protocol if none specified.
   ///
-  /// This is used to unsure that URLs that do not include the scheme
+  /// This is used to ensure that URLs that do not include the scheme
   /// are treated as absolute paths (not relative to the document URL).
   static String setUriSchemeToHttp(String originalURL) {
     String finalUrl;

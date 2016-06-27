@@ -4,7 +4,7 @@
 library pappes_utility_test;
 
 import 'package:pappes_utility/pappes_utility.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 void main() => defineTests();
 

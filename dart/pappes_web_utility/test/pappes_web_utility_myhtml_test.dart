@@ -3,7 +3,7 @@
 
 library pappes_web_utility.MyHtml.test;
 
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'dart:html';
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 
@@ -12,8 +12,9 @@ void main() => defineTests();
 void defineTests() {
   
 
-  group('pappes_web_utility MyHtml tests for remove URI paramseters', () {
+  group('pappes_web_utility MyHtml tests for remove URI parameters', () {
     test('no paramaters', () => expect(MyHtml.setUriParameters('http://www.abc.com'), 'http://www.abc.com'));
+    test('relative path', () => expect(MyHtml.setUriParameters('/abc/index.html'), '/abc/index.html'));
     test('two existing parameters', () => expect(MyHtml.setUriParameters('http://www.abc.com?x=y&a=b'), 'http://www.abc.com'));
     test('supply replacement', () => expect(MyHtml.setUriParameters('http://www.abc.com?x=y&a=b', replacementParameters: 'abc=123'), 'http://www.abc.com?abc=123'));
     test('able to find match', () => expect(MyHtml.setUriParameters('http://www.abc.com?x=HelloWorld&a=b', searchFor: 'HelloWorld'), 'http://www.abc.com'));
