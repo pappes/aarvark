@@ -57,6 +57,7 @@ void defineTests() {
     test('fragment3', () => expect(new Element.html(fragment3).outerHtml, fragment3));
   });
 
+
   group('pappes_web_utility MyHtml integration tests test initial HTML state ', () {
     test('non_redirect', () => expect(document.querySelector('#non_redirect').attributes['href'], 'http://www.abc.com/noredirect?u=realurl_com'));
     test('redirect_simple_www', () => expect(document.querySelector('#redirect_simple_www').attributes['href'], 'http://www.abc.com/redirect?u=www.realurl.com'));
@@ -71,12 +72,12 @@ void defineTests() {
     test('redirect_http_b64_encode', () => expect(document.querySelector('#redirect_http_b64_encode').attributes['href'], 'http://www.abc.com/redirect?l=aHR0cDovL3d3dy5yZWFsdXJsLmNvbS90YXJnZXQvP2M9ZCZlPTEyMw=='));
     test('redirect_http_b64_encode_param', () => expect(document.querySelector('#redirect_http_b64_encode_param').attributes['href'], 'http://www.abc.com/redirect?l=aHR0cDovL3d3dy5yZWFsdXJsLmNvbS90YXJnZXQvP2M9ZCZlPTEyMw==&x=y&a=b'));
   });
-  group('pappes_web_utility MyHtml integration tests change state', () {
+  group('pappes_web_utility MyHtml alterAttribute integration tests change state', () {
     test('alter href links', () {
       expect(MyHtml.iterateHTMLDOM(document.body, (element) => MyHtml.alterAttribute(element, 'href', (url) => MyHtml.removeUrlRedirect(url))), isNull);
     });
   });
-  group('pappes_web_utility MyHtml integration tests test modified HTML state', () {
+  group('pappes_web_utility MyHtml alterAttribute integration tests test modified HTML state', () {
     test('test modified HTML state', () => expect(document.querySelector('#non_redirect').attributes['href'], 'http://www.abc.com/noredirect?u=realurl_com'));
     test('redirect_simple_www', () => expect(document.querySelector('#redirect_simple_www').attributes['href'], 'http://www.realurl.com'));
     test('redirect_simple_http', () => expect(document.querySelector('#redirect_simple_http').attributes['href'], 'http://www.realurl.com'));
@@ -89,6 +90,24 @@ void defineTests() {
     test('redirect_http_fake_b64_encode_param', () => expect(document.querySelector('#redirect_http_fake_b64_encode_param').attributes['href'], 'http://www.realurl.com/target/?x=y&a=b'));
     test('redirect_http_b64_encode', () => expect(document.querySelector('#redirect_http_b64_encode').attributes['href'], 'http://www.realurl.com/target/?c=d&e=123'));
     test('redirect_http_b64_encode_param', () => expect(document.querySelector('#redirect_http_b64_encode_param').attributes['href'], 'http://www.realurl.com/target/?c=d&e=123'));
+  });
+
+  group('pappes_web_utility MyHtml logMessageIntoHTMLBodyComment integration tests change state', () {
+    test('alter href links', () {
+      expect(MyHtml.logMessageIntoHTMLBodyComment('comment 1'), isNull);
+    });
+  });
+  group('pappes_web_utility MyHtml integration tests test modified HTML state', () {
+    test('test modified HTML state', () => expect(document.body.childNodes.last.text, 'comment 1'));
+  });
+  group('pappes_web_utility MyHtml logMessageIntoHTMLBodyComment integration tests compound change state', () {
+    test('alter href links', () {
+      expect(MyHtml.logMessageIntoHTMLBodyComment('comment 2'), isNull);
+      expect(MyHtml.logMessageIntoHTMLBodyComment('comment 3'), isNull);
+    });
+  });
+  group('pappes_web_utility MyHtml integration tests test compound modified HTML state', () {
+    test('test modified HTML state', () => expect(document.body.childNodes.last.text, 'comment 1\ncomment 2\ncomment 3'));
   });
 
   group('pappes_web_utility MyHtml removeAllScripts tests inital HTML state', () {

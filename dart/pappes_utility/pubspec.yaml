@@ -4,4 +4,4 @@ author: Pappes
 description: A library useful for console applications or web applications.  Currently includes RamCache which is an in memory object store and helper functions like ifNull()
 homepage: https://github.com/pappes/aarvark
 dev_dependencies:
-  unittest: any
+  test: any

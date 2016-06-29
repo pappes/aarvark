@@ -4,7 +4,6 @@ A library for Pappes.  Others might find it useful
 
 ## Usage
 
-TODO:
 A simple usage example:
 
     import 'package:pappes_web_utility/pappes_web_utility.dart';

@@ -3,7 +3,7 @@
 
 library pappes_web_utility.test;
 
-import 'package:test/test.dart' as test;
+import 'package:test/test.dart';
 import 'package:logging/logging.dart' as logging;
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 import 'pappes_web_utility_myjs_test.dart' as MyJS_test;
@@ -29,6 +29,7 @@ main() {
   
   MyJS_test.defineTests();
   MyHtml_test.defineTests();
+  test('faketest', () => expect(destructiveLevel, destructiveLevel));
   if (destructiveLevel == destructiveCapability['DESTRUCTIVE']) MyHtml_dest_test.defineTests();//stops javascript in chrome as shown by a blank console
   else if (destructiveLevel == destructiveCapability['VERYDESTRUCTIVE']) MyHtml_very_dest_test.defineTests();//stops dart in dartium
 }

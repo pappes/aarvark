@@ -181,7 +181,7 @@ class MyHtml {
     log.fine('Function : iterateHTMLDOM, Return : void');
   }
 
-  /// Determines if e if a friendly script [e].
+  /// Determines if [e] if a friendly script.
   static bool _whitelistScripts(Element e) {
     log.info('Function : _whitelistScripts, Parameters : {[e,$e]}');
     bool retVal = false;
@@ -205,7 +205,7 @@ class MyHtml {
     log.fine('Function : removeAllScripts, Return : void');
   }
 
-  /// Removes event handlers from individual elements 
+  /// Removes event handlers from an element [e]
   static void removeEventHandler(Element e) {
     //clone the items in the body to sever any event handlers
     log.info('Function : removeEventHandler, Parameters : {[e,$e]}');
@@ -213,6 +213,7 @@ class MyHtml {
         e.replaceWith(e.clone(true));
     log.fine('Function : removeEventHandler, Return : void');
   }
+
   /// Removes all event handlers from all elements except [selected] 
   /// on the browser DOM.
   static void removeAllHandlers(HtmlDocument htmlDoc, [HtmlElement selected = null]) {
@@ -256,7 +257,6 @@ class MyHtml {
   ///   * <object>
   ///   * or other element that has an external reference
   /// * [baseUrl] the parent URL to use for resolving
-
   static resolveElementUrl(Element childElement, String baseUrl) {
     log.info(
         'Function : resolveElementUrl, '
@@ -271,6 +271,27 @@ class MyHtml {
     });
     log.fine('Function : resolveElementUrl, Return : void');
   }
+
+  /// adds a debug [message] into the body of the HTML page or a specified [node].
+  static logMessageIntoHTMLBodyComment(String message, [Node node]) {
+    log.info(
+        'Function : logMessageIntoHTMLBodyComment, '
+            'Parameters : {[message,$message][element,$node.nodeName]}');
+    //use supplied node or last node in HTML body
+    Node targetNode = node;
+    if (targetNode == null) {
+      targetNode = document.body.childNodes.last;
+    }
+    //append to existing comment or create new comment node
+    if (targetNode.nodeName != '#comment') {
+      document.body.append( new Comment(message));
+    } else {
+      targetNode.text = targetNode.text + "\n"+ message;
+    }
+    log.fine('Function : logMessageIntoHTMLBodyComment, Return : void');
+  }
+
+
   /// Removes any element that obscures another element from [htmlDoc].
   ///
   /// If there is an iFrame or object on the page, finds the largest one and:
@@ -428,6 +449,7 @@ class MyIFrame {//TODO(pappes) remove direct reference to window
   /// and runs extra cleanup processing on it
   makeProminant([void cleanUpProcess(dynamic parentNode), bool allowRedirect =
       true]) {
+    //TODO (pappes) fix typo in method name "Prominent"
     log.info(
         'Function : makeProminant, Parameters : {[cleanUpProcess,$cleanUpProcess], '
             '[allowRedirect,$allowRedirect]}');

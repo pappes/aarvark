@@ -3,13 +3,17 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/build" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/example/packages" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/packages" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/test/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/dart/pappes_utility/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/build" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/example/packages" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/packages" />
       <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/test/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/dart/pappes_web_utility/web/packages" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

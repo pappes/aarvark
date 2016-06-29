@@ -6,7 +6,7 @@ part 'pappes_utility_ramcache.dart';
 
 
 /// Substitutes the value [alternate] if the value [test] is null.
-/// For exampple:
+/// For example:
 /// 
 ///    
 dynamic ifNull(test, alternate) {
