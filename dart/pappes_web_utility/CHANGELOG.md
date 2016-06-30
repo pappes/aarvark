@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4+1
+add workaround for bug in Uri.hasAuthority
+## 0.0.4
+add ability to log messages into comments in HTML body
 ## 0.0.3+6, +7
 extend setUriParameters and removeUrlRedirect to be aware of relative URLs
 ## 0.0.3+2, +3, +4

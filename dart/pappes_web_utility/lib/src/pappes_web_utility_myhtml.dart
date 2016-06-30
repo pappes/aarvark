@@ -42,7 +42,8 @@ class MyHtml {
       x = new Uri(
           scheme: x.scheme,
           userInfo: x.userInfo,
-          host: x.host,
+          //convert empty string to null to work around a bug in Uri.hasAuthority
+          host: (x.host==''?null:x.host),
           port: x.port,
           path: x.path,
           query: replacementParameters);
