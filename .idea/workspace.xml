@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d070b384-db47-4176-b544-f51a36a4597e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/aarvark.iml" afterPath="$PROJECT_DIR$/.idea/aarvark.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/dj.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/dj.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_utility/.packages" afterPath="$PROJECT_DIR$/dart/pappes_utility/.packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_utility/lib/src/pappes_utility_base.dart" afterPath="$PROJECT_DIR$/dart/pappes_utility/lib/src/pappes_utility_base.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_utility/pubspec.yaml" afterPath="$PROJECT_DIR$/dart/pappes_utility/pubspec.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/.packages" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/.packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/README.md" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/pubspec.yaml" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/pubspec.yaml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart" afterPath="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart" />
     </list>
     <ignored path="aarvark.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,8 +29,8 @@
       <file leaf-file-name="pappes_web_utility_myhtml.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="n#!!block;n#_NonTreeSanitizer#0" expanded="false" />
               </folding>
@@ -47,21 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pubspec.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/pubspec.yaml">
+      <file leaf-file-name="all_test.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pappes_web_utility_myhtml_test.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="68">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="6" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -70,10 +51,22 @@
       <file leaf-file-name="pappes_web_utility_myhtml_test.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="109" column="107" selection-start-line="109" selection-start-column="107" selection-end-line="109" selection-end-column="107" />
+            <state relative-caret-position="2023">
+              <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
               <folding>
                 <element signature="e#195#227#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pappes_web_utility_base.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+              <folding>
+                <element signature="e#226#245#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,22 +89,22 @@
       <list>
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myjs.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/CHANGELOG.md" />
-        <option value="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_utility/test/all_test.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test_destructive.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_utility/test/pappes_utility_test.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test_very_destructive.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myjs_test.dart" />
-        <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/sample_test.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_utility/lib/src/pappes_utility_base.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_utility/pubspec.yaml" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/README.md" />
         <option value="/" />
-        <option value="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/pubspec.yaml" />
         <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.html" />
+        <option value="$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart" />
+        <option value="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart" />
+        <option value="$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart" />
       </list>
     </option>
   </component>
@@ -152,7 +145,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,61 +269,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
+              <option name="myItemId" value=".pub" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aarvark" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aarvark" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pappes_web_utility" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="runner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="browser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="browser" />
+              <option name="myItemId" value="bin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,15 +288,12 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pappes_utility" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,7 +304,7 @@
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
     <property name="nodejs.mocha.mocha_node_package_dir" value="" />
-    <property name="DART_PUB_BUILD_MODE" value="debug" />
+    <property name="DART_PUB_BUILD_MODE" value="release" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -530,7 +469,9 @@
       <workItem from="1466839051703" duration="6766000" />
       <workItem from="1467105666859" duration="1623000" />
       <workItem from="1467108536173" duration="7148000" />
-      <workItem from="1467191183523" duration="2204000" />
+      <workItem from="1467191183523" duration="4172000" />
+      <workItem from="1467195868291" duration="586000" />
+      <workItem from="1467277919433" duration="1496000" />
     </task>
     <servers />
   </component>
@@ -567,7 +508,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22021000" />
+    <option name="totallyTimeSpent" value="26071000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -580,27 +521,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1872" height="1084" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23882225" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Pub Serve" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3575184" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32878152" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Pub Serve" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32878152" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -621,8 +562,12 @@
           <url>file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart</url>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart</url>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JavascriptDebugType">
@@ -631,6 +576,62 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4862">
+          <caret line="289" column="12" selection-start-line="289" selection-start-column="12" selection-end-line="289" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!block;n#_NonTreeSanitizer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#195#227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4624">
+          <caret line="275" column="38" selection-start-line="275" selection-start-column="9" selection-end-line="275" selection-end-column="38" />
+          <folding>
+            <element signature="n#!!block;n#_NonTreeSanitizer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+          <folding>
+            <element signature="e#195#227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4862">
@@ -645,7 +646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -670,6 +670,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/README.md">
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor relative-caret-position="0">
@@ -677,9 +680,6 @@
           </first_editor>
           <second_editor />
         </state>
-      </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dart/pappes_utility/pubspec.yaml">
@@ -689,18 +689,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/sample_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/sample_test.dart" />
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -787,45 +780,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/pappes_web_utility.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myjs.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test_very_destructive.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myjs_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -886,10 +844,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -899,8 +855,10 @@
           <second_editor />
         </state>
       </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+        </state>
       </provider>
     </entry>
     <entry file="file://C:/tools/dart-sdk/lib/html/dartium/html_dartium.dart">
@@ -910,57 +868,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/build/web/packages/pappes_web_utility/src/pappes_web_utility_myhtml.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4488">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23928#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/build/web/packages/pappes_web_utility/src/pappes_web_utility_myhtml.dart" />
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/test-0.12.14+1/lib/src/frontend/expect.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="109" column="107" selection-start-line="109" selection-start-column="107" selection-end-line="109" selection-end-column="107" />
-          <folding>
-            <element signature="e#195#227#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!block;n#_NonTreeSanitizer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/sample_test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/sample_test.dart" />
     <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="187">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myjs_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -968,6 +895,59 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/pappes_web_utility_myhtml_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
+          <folding>
+            <element signature="e#195#227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_base.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding>
+            <element signature="e#226#245#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/pappes_web_utility.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myjs.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/lib/src/pappes_web_utility_myhtml.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!block;n#_NonTreeSanitizer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dart/pappes_web_utility/test/all_test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="6" selection-end-column="49" />
           <folding />
         </state>
       </provider>

@@ -16,15 +16,17 @@ main() {
   final destructiveCapability = {'SAFE':1,'DESTRUCTIVE':2,'VERYDESTRUCTIVE':3}; 
   int destructiveLevel;
   destructiveLevel = destructiveCapability['SAFE'];
-  destructiveLevel = destructiveCapability['DESTRUCTIVE'];
+  //destructiveLevel = destructiveCapability['DESTRUCTIVE'];
   //destructiveLevel = destructiveCapability['VERYDESTRUCTIVE'];//uncomment if destructive testing is required
   
 
   //loggin_handlers.attachXLoggerUi(); // lives in the browser_logging_handlers library
   logging.hierarchicalLoggingEnabled = true;
   log.level = logging.Level.WARNING;
+  log.level = logging.Level.FINEST;
   log.onRecord.listen((logging.LogRecord rec) {
     print('${rec.level.name}: ${rec.time}: ${rec.message}');
+    MyHtml.logMessageIntoHTMLBodyComment('${rec.level.name}: ${rec.time}: ${rec.message}');
   });
   
   MyJS_test.defineTests();

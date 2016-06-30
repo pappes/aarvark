@@ -10,7 +10,6 @@ import 'dart:html';
 import 'dart:js' as js;
 import 'package:pappes_utility/pappes_utility.dart';
 import 'package:logging/logging.dart';
-import 'package:test/test.dart';
 
 part 'pappes_web_utility_myhtml.dart';
 part 'pappes_web_utility_myjs.dart';

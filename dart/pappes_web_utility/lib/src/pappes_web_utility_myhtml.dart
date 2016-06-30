@@ -186,10 +186,10 @@ class MyHtml {
     log.info('Function : _whitelistScripts, Parameters : {[e,$e]}');
     bool retVal = false;
     String src = ifNull(e.outerHtml, '').toLowerCase();
-    if (src.contains('swf') || 
-        src.contains('devtool') || 
-        src.contains('devobj')) 
-      retVal=true;    
+    if (src.contains('swf') ||
+        src.contains('devtool') ||
+        src.contains('devobj'))
+      retVal=true;
     log.fine('Function : _whitelistScripts, Return : $retVal');
     return retVal;
   }
@@ -197,7 +197,7 @@ class MyHtml {
   /// Removes suspect script tags from [htmlDoc].
   static removeAllScripts(HtmlDocument htmlDoc) {
     log.info('Function : removeAllScripts, Parameters : {[htmlDoc,$htmlDoc]}');
-    htmlDoc.querySelectorAll('script').where((e) => 
+    htmlDoc.querySelectorAll('script').where((e) =>
         _whitelistScripts(e) == false).forEach((Element e) {
       log.finest('Function : removeAllScripts, removed : ${e.outerHtml}');
       e.remove();
@@ -209,12 +209,12 @@ class MyHtml {
   static void removeEventHandler(Element e) {
     //clone the items in the body to sever any event handlers
     log.info('Function : removeEventHandler, Parameters : {[e,$e]}');
-    if (e.nodeName.toLowerCase() != 'script') 
+    if (e.nodeName.toLowerCase() != 'script')
         e.replaceWith(e.clone(true));
     log.fine('Function : removeEventHandler, Return : void');
   }
 
-  /// Removes all event handlers from all elements except [selected] 
+  /// Removes all event handlers from all elements except [selected]
   /// on the browser DOM.
   static void removeAllHandlers(HtmlDocument htmlDoc, [HtmlElement selected = null]) {
     //clone the items in the body to sever any event handlers
@@ -274,9 +274,11 @@ class MyHtml {
 
   /// adds a debug [message] into the body of the HTML page or a specified [node].
   static logMessageIntoHTMLBodyComment(String message, [Node node]) {
+/*
     log.info(
         'Function : logMessageIntoHTMLBodyComment, '
             'Parameters : {[message,$message][element,$node.nodeName]}');
+*/
     //use supplied node or last node in HTML body
     Node targetNode = node;
     if (targetNode == null) {
@@ -286,9 +288,15 @@ class MyHtml {
     if (targetNode.nodeName != '#comment') {
       document.body.append( new Comment(message));
     } else {
-      targetNode.text = targetNode.text + "\n"+ message;
+      try {
+        targetNode.text = targetNode.text + "\n"+ message;
+      } catch(exception) {
+        document.body.append( new Comment(message));
+      }
     }
+/*
     log.fine('Function : logMessageIntoHTMLBodyComment, Return : void');
+*/
   }
 
 
@@ -371,7 +379,7 @@ class MyHtml {
       //whitelist all elements of type object so the user can watch videos
       //whitelist all elements of type video so the user can watch videos
       //whitelist all elements of type iframe so that external content can remain
-      target.querySelectorAll('input, object, iframe, video').forEach((e) => 
+      target.querySelectorAll('input, object, iframe, video').forEach((e) =>
           _whitelistElementAndParents(e, elementsToBeDeleted));
 
       //whitelist all elements of type anchor that have text
@@ -384,7 +392,7 @@ class MyHtml {
 
     //whitelist all scripts which are known to be useful
     //so that flash can be dynamically loaded
-    target.querySelectorAll('script').where((e) => 
+    target.querySelectorAll('script').where((e) =>
         _whitelistScripts(e)).forEach((Element e) {
         _whitelistElementAndParents(e, elementsToBeDeleted);
     });
@@ -407,9 +415,9 @@ class MyHtml {
         'b.width=${b.clientWidth} b.height=${b.clientHeight}');
     int comparison;
     if (a.clientWidth * a.clientHeight <
-        b.clientWidth * b.clientHeight) comparison = -1; 
+        b.clientWidth * b.clientHeight) comparison = -1;
     else if (a.clientWidth * a.clientHeight ==
-             b.clientWidth * b.clientHeight) comparison = 0; 
+             b.clientWidth * b.clientHeight) comparison = 0;
     else comparison = 1;
     log.fine('Function : _compareElementArea, Return : $comparison');
     return comparison;
