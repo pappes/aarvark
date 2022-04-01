@@ -1,6 +1,9 @@
 # Changelog
 
 ## 0.0.4+1
+Upgrade to dart 2 and null safety
+
+## 0.0.4+1
 add workaround for bug in Uri.hasAuthority
 ## 0.0.4
 add ability to log messages into comments in HTML body

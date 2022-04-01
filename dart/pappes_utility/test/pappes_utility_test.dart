@@ -66,7 +66,7 @@ void defineTests() {
     });
     test('dart language quirk - unrequested duplication of an object', () {
       RamCache.remember('number 10', 10);
-      int tempInt = RamCache.recall('number 10');
+      int tempInt = RamCache.recall('number 10') as int;
       RamCache.remember('number 11', ++tempInt);
       expect(RamCache.recall('number 10'), 10);
       expect(RamCache.recall('number 11'), 11);

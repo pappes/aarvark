@@ -14,7 +14,7 @@ import 'pappes_web_utility_myhtml_test_very_destructive.dart' as MyHtml_very_des
 main() {
   
   final destructiveCapability = {'SAFE':1,'DESTRUCTIVE':2,'VERYDESTRUCTIVE':3}; 
-  int destructiveLevel;
+  int? destructiveLevel;
   destructiveLevel = destructiveCapability['SAFE'];
   //destructiveLevel = destructiveCapability['DESTRUCTIVE'];
   //destructiveLevel = destructiveCapability['VERYDESTRUCTIVE'];//uncomment if destructive testing is required

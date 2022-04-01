@@ -10,9 +10,11 @@ void main() => defineTests();
 
 void defineTests() {
   group('pappes_web_utility MyJS tests', () {
-
     test('test runAnyJavaScript console.log', () {
-      expect(MyJS.runAnyJavaScript('console.log(" unit testing runAnyJavaScript console.log " + (1+2));'), isNull);
+      expect(
+          MyJS.runAnyJavaScript(
+              'console.log(" unit testing runAnyJavaScript console.log " + (1+2));'),
+          isNull);
     });
     test('test runAnyJavaScript math', () {
       expect(MyJS.runAnyJavaScript('1+2'), 3);
@@ -21,9 +23,11 @@ void defineTests() {
       expect(MyJS.runAnyJavaScript('"1"+"2"'), '12');
     });
     //this test is sucessfull if the alert does not show, because all timers were killed by the test
-    print( 'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing MyJS: timer created 3 seconds ago!!!!   MyJS.removeAllTimers should have stopped this message from appearing."); }, 3000);')}');
+    print(
+        'Created timer #${MyJS.runAnyJavaScript('setTimeout(function(){ alert("Unit testing MyJS: timer created 3 seconds ago!!!!   MyJS.removeAllTimers should have stopped this message from appearing."); }, 3000);')}');
     test('test removeAllTimers', () {
-      expect(MyJS.removeAllTimers(), isNull);
+      // Confirm no exception is thrown
+      MyJS.removeAllTimers();
     });
     test('test encode', () {
       expect(base64Encode('Hello World'), 'SGVsbG8gV29ybGQ=');

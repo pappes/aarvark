@@ -12,11 +12,11 @@ void main() => defineTests();
 void defineTests() { 
 
   group('pappes_web_utility MyHtml removeAllOverlays tests initial HTML state', () {
-    test('element_p', () => expect(document.querySelector('#outside_p').attributes['id'], 'outside_p'));
-    test('element_a_text', () => expect(document.querySelector('#outside_anchor_text').attributes['id'], 'outside_anchor_text'));
-    test('element_a_blank', () => expect(document.querySelector('#outside_anchor_button').attributes['id'], 'outside_anchor_button'));
-    test('element_iframe', () => expect(document.querySelector('#outside_iframe').attributes['src'], 'pappes_web_utility_myhtml_iframe_test.html'));
-    test('element_iframe_unnamed', () => expect(document.querySelector('iframe').attributes['src'], 'pappes_web_utility_myhtml_iframe_test.html'));
+    test('element_p', () => expect(document.querySelector('#outside_p')!.attributes['id'], 'outside_p'));
+    test('element_a_text', () => expect(document.querySelector('#outside_anchor_text')!.attributes['id'], 'outside_anchor_text'));
+    test('element_a_blank', () => expect(document.querySelector('#outside_anchor_button')!.attributes['id'], 'outside_anchor_button'));
+    test('element_iframe', () => expect(document.querySelector('#outside_iframe')!.attributes['src'], 'pappes_web_utility_myhtml_iframe_test.html'));
+    test('element_iframe_unnamed', () => expect(document.querySelector('iframe')!.attributes['src'], 'pappes_web_utility_myhtml_iframe_test.html'));
     //test('element_frame', () => expect(document.querySelector('#outside_frame_a').attributes['id'], 'outside_frame_a'));
     test('element_frame', () => expect(document.querySelector('#outside_frame_a'), isNull));//dart cant find frames
     //test('element_frame_unnamed', () => expect(document.querySelector('frame').attributes['id'], 'outside_frame_a'));
@@ -33,7 +33,7 @@ void defineTests() {
   });
   group('pappes_web_utility MyHtml removeAllOverlays tests intermediate HTML state', () {
     test('element_p', () => expect(document.querySelector('#outside_p'), isNull));
-    test('element_a_text', () => expect(document.querySelector('#outside_anchor_text').attributes['id'], 'outside_anchor_text'));
+    test('element_a_text', () => expect(document.querySelector('#outside_anchor_text')!.attributes['id'], 'outside_anchor_text'));
     test('element_a_blank', () => expect(document.querySelector('#outside_anchor_button'), isNull));
     /*test('element_iframe', () => expect(document.querySelector('#iframe_rebuilt').attributes['id'], 'iframe_rebuilt'));
     test('element_iframe_unnamed', () => expect(document.querySelector('iframe').attributes['id'], 'iframe_rebuilt'));

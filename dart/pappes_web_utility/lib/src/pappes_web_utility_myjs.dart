@@ -39,7 +39,7 @@ class MyJS {
   ///   MyJS.runAnyJavaScript('1+2');//returns: 3
   ///   MyJS.runAnyJavaScript('console.log(" 1 + 2 = " + (1+2));');//returns null, logs: 1 + 2 = 3
   ///   
-  static Object runAnyJavaScript(String command) {
+  static Object? runAnyJavaScript(String command) {
     dynamic retObject;
     bool jsHasEval;
     try {
@@ -61,7 +61,7 @@ class MyJS {
   /// 
   ///    print(MyJS.atob('SGVsbG8gV29ybGQ='));
   ///    
-  static String atob(String val) {
+  static String? atob(String val) {
     bool jsHasAtob;
     try {
       jsHasAtob = js.context.hasProperty('atob');
@@ -85,7 +85,7 @@ class MyJS {
   /// 
   ///    print(MyJS.btoa('Hello World'));
   ///    
-  static String btoa(String val) {
+  static String? btoa(String val) {
     bool jsHasBtoA;
     try {
       jsHasBtoA = js.context.hasProperty('btoa');
