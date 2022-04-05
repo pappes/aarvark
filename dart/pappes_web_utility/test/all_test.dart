@@ -1,6 +1,7 @@
 // Copyright (c) 2015, Pappes. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+@TestOn('chrome && js')
 library pappes_web_utility.test;
 
 import 'package:test/test.dart';

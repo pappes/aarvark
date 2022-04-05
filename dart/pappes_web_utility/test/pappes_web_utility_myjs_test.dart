@@ -3,6 +3,7 @@
 
 library pappes_web_utility.MyJS.test;
 
+@TestOn('browser && js')
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 import 'package:test/test.dart';
 

@@ -3,6 +3,7 @@
 
 library pappes_web_utility.MyHtml.cutdown_test;
 
+@TestOn('browser && js')
 import 'package:test/test.dart';
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 

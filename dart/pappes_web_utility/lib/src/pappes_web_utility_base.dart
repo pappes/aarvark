@@ -5,16 +5,12 @@
 
 library pappes_web_utility.base;
 
-//import 'dart:html';
+import 'dart:html';
 
-//import 'package:js/js.dart';
-//import 'dart:js' as js;
-//import 'dart:js';
-import 'package:universal_html/html.dart';
+import 'dart:js' as js;
 import 'package:logging/logging.dart';
 import 'package:pappes_utility/pappes_utility.dart';
 import 'package:pappes_web_utility/src/pappes_web_utility_js_wrapper.dart';
-import 'package:universal_html/js.dart';
 
 part 'pappes_web_utility_myhtml.dart';
 part 'pappes_web_utility_myjs.dart';

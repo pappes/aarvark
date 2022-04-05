@@ -62,12 +62,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "csslib",
-      "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "file",
       "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
       "packageUri": "lib/",
@@ -84,12 +78,6 @@
       "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/glob-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
-    },
-    {
-      "name": "html",
-      "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/html-0.15.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "http_multi_server",
@@ -266,18 +254,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "universal_html",
-      "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/universal_html-2.0.8",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "universal_io",
-      "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/universal_io-2.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "vm_service",
       "rootUri": "file:///home/dj/.pub-cache/hosted/pub.dartlang.org/vm_service-8.2.2",
       "packageUri": "lib/",
@@ -314,7 +290,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-04-03T06:07:02.097222Z",
+  "generated": "2022-04-03T07:11:43.849725Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

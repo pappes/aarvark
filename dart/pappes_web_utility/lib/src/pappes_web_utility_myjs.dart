@@ -19,11 +19,10 @@ class MyJS {
   /// Removes all javascript timers from the browser tab.
   static void removeAllTimers() {
     try {
-      final js = JSWrapper();
       // Set a fake timeout to get the highest timeout id
-      int highestTimeoutId = js.setTimeout(";");
+      int highestTimeoutId = js.context.callMethod('setTimeout', [";"]);
       for (var i = 0; i < highestTimeoutId; i++) {
-        js.clearTimeout(i);
+        js.context.callMethod('clearTimeout', [i]);
       }
     } catch (e) {
       //ignore JS errors if running in dart VM
@@ -37,10 +36,10 @@ class MyJS {
   /// if this was javascript you could do
   ///    document.getElementById('frame').contentWindow.document.body.innerHTML
   static String? getIFrameHtml(IFrameElement iFrame) {
-    final jsIFrame = new JsObject.fromBrowserObject(iFrame);
-    JsObject jsWindow = jsIFrame['contentWindow'] as JsObject;
-    JsObject jsDocument = jsWindow['document'] as JsObject;
-    JsObject jsBody = jsDocument['body'] as JsObject;
+    final jsIFrame = new js.JsObject.fromBrowserObject(iFrame);
+    js.JsObject jsWindow = jsIFrame['contentWindow'] as js.JsObject;
+    js.JsObject jsDocument = jsWindow['document'] as js.JsObject;
+    js.JsObject jsBody = jsDocument['body'] as js.JsObject;
     String? jsHTML = jsBody['innerHTML'] as String?;
     return jsHTML;
   }
@@ -51,16 +50,21 @@ class MyJS {
   ///   MyJS.runAnyJavaScript('1+2');//returns: 3
   ///   MyJS.runAnyJavaScript('console.log(" 1 + 2 = " + (1+2));');//returns null, logs: 1 + 2 = 3
   ///
-  static Object? runAnyJavaScript(String command) {
-    JSWrapper js = JSWrapper();
+  static dynamic runAnyJavaScript(String command) {
+    dynamic retObject;
+    bool jsHasEval;
     try {
-      js = JSWrapper();
-      dynamic retObject = js.eval(command);
-      return retObject;
+      jsHasEval = js.context.hasProperty('eval');
     } catch (e) {
       throw (new StateError(
           'Dart -> JavaScript interop not initialised.  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);  Original error: $e'));
     }
+    if (jsHasEval) {
+      retObject = js.context.callMethod('eval', ["$command"]);
+      return retObject;
+    }
+    throw (new StateError(
+        'Dart -> JavaScript interop not accepting calls to eval().  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);'));
   }
 
   /// Converts [val] from base64 to text.
@@ -71,22 +75,23 @@ class MyJS {
   ///    print(MyJS.atob('SGVsbG8gV29ybGQ='));
   ///
   static String? atob(String val) {
-    JSWrapper js = JSWrapper();
+    bool jsHasAtob;
     try {
-      js = JSWrapper();
-      js.atob(''); //Validate that simple decode can succeed
+      jsHasAtob = js.context.hasProperty('atob');
     } catch (e) {
       throw (new StateError(
           'Dart -> JavaScript interop not initialised.  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);  Original error: $e'));
     }
-    try {
-      dynamic retObject = js.atob(val);
-      return retObject;
-    } catch (e) {
-      //ignore attempts to decode invalid strings
-      //"InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
-      return null;
-    }
+    if (jsHasAtob)
+      try {
+        return js.context.callMethod('atob', ["$val"]);
+      } catch (e) {
+        //ignore attempts to decode invalid strings
+        //"InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
+        return null;
+      }
+    throw (new StateError(
+        'Dart -> JavaScript interop not accepting calls to atob().  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);'));
   }
 
   /// Converts [val] from text to base64.
@@ -96,16 +101,23 @@ class MyJS {
   ///    print(MyJS.btoa('Hello World'));
   ///
   static String? btoa(String val) {
-    JSWrapper js = JSWrapper();
+    bool jsHasBtoA;
     try {
-      js = JSWrapper();
-      js.btoa(''); //Validate that simple encode can succeed
+      jsHasBtoA = js.context.hasProperty('btoa');
     } catch (e) {
       throw (new StateError(
           'Dart -> JavaScript interop not initialised.  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);  Original error: $e'));
     }
-    dynamic retObject = js.btoa(val);
-    return retObject;
+    if (jsHasBtoA)
+      try {
+        return js.context.callMethod('btoa', ["$val"]);
+      } catch (e) {
+        //ignore attempts to decode invalid strings
+        //"InvalidCharacterError: Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
+        return null;
+      }
+    throw (new StateError(
+        'Dart -> JavaScript interop not accepting calls to btoa().  Try changing your html to include <script src="packages/browser/inteerop.js"></script>);'));
   }
 
   ///Returns an existing singleton.
