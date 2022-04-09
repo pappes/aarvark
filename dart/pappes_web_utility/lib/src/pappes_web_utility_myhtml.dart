@@ -28,24 +28,31 @@ class MyHtml {
   ///    searchFor: 'HelloWorld', replacementParameters: 'abc=123')
   static String setUriParameters(String originalUrl,
       {String? searchFor, String? replacementParameters}) {
-    String finalUrl;
+    var finalUrl = originalUrl;
     log.info('Function : setUriParameters, '
         'Parameters : {[originalUrl,$originalUrl ][searchFor,$searchFor ]'
         '[replacementParameters,$replacementParameters ]}');
 
-    Uri x = Uri.parse(originalUrl);
-    if (searchFor == null ||
-        x.query.toLowerCase().contains(searchFor.toLowerCase())) {
-      x = new Uri(
-          scheme: x.scheme,
-          userInfo: x.userInfo,
-          //convert empty string to null to work around a bug in Uri.hasAuthority
-          host: (x.host == '' ? null : x.host),
-          port: x.port,
-          path: x.path,
-          query: replacementParameters);
-    }
-    finalUrl = x.toString();
+      Uri x = Uri.parse(finalUrl.trim()); // Uri.parse() does not work with leading spaces
+      log.fine('Function : setUriParameters, '
+          'x.scheme : ${x.scheme}'
+          'x.userInfo : ${x.userInfo}'
+          'x.host : ${x.host}'
+          'x.port : ${x.port}'
+          'x.path : ${x.path}'
+          'x.query : ${x.query}');
+      if (searchFor == null ||
+          x.query.toLowerCase().contains(searchFor.toLowerCase())) {
+        x = new Uri(
+            scheme: x.scheme,
+            userInfo: x.userInfo,
+            //convert empty string to null to work around a bug in Uri.hasAuthority
+            host: (x.host == '' ? null : x.host),
+            port: x.port,
+            path: x.path,
+            query: replacementParameters);
+      }
+      finalUrl = x.toString();
 
     log.fine('Function : setUriParameters, Return : $finalUrl');
     return finalUrl;
