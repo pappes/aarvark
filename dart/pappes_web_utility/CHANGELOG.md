@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.4+1
+## 1.0.1
 Upgrade to dart 2 and null safety
 
 ## 0.0.4+1

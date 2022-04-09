@@ -17,6 +17,10 @@ A simple usage example:
       print(MyHtml.setUriParameters('http://www.abc.com?x=HelloWorld&a=b', searchFor: 'HelloWorld', replacementParameters: 'abc=123'));//prints 'http://www.abc.com?abc=123'
     }
 
+## Testing
+
+This library has code that exploits browser gaps when copiled to javascipt.  To force it to compile js for testing, run `dart test -platform chrome`.
+
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
