@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+Removed obsolete ifNull function.
+Added new mapToCsv function.
+
 ## 1.0.1
 upgrade to dart V2 and null safety
 

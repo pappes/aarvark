@@ -9,10 +9,8 @@ A simple usage example:
     import 'package:pappes_utility/pappes_utility.dart';
 
     main() {
-      int x=10;
-      int y=20;
-      x = ifNull(x, y);//use x if it has a value otherwise use y
-      
+      Map values = {'a': 1, 'b': 'abc"def'};
+      final csv = mapToCSV(values); // will return "1","abc""def"
       
       RamCache.remember('MyKey', x);
       print(RamCache.recall('MyKey'));
