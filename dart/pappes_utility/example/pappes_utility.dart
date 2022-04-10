@@ -6,13 +6,10 @@ library pappes_utility.example;
 import 'package:pappes_utility/pappes_utility.dart';
 
 main() {
-  
-  int? x=10;
-  int y=20;
-  x = ifNull(x, y);//use x if it has a value otherwise use y
-  
-  
-  RamCache.remember('MyKey', x);
+  Map values = {'a': 1, 'b': 'abc"def'};
+  final csv = mapToCSV(values); // will return "1","abc""def"
+
+  RamCache.remember('MyKey', csv);
   print(RamCache.recall('MyKey'));
   RamCache.forget('MyKey');
 }

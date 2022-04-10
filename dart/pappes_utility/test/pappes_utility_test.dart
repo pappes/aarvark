@@ -9,27 +9,31 @@ import 'package:test/test.dart';
 void main() => defineTests();
 
 void defineTests() {
-  group('pappes_utility ifNull testing', () {
-    test('absent number', () {
-      expect(ifNull(null,1), 1);
+  group('pappes_utility mapToCSV testing', () {
+    test('empty map', () {
+      Map values = {};
+      final csv = mapToCSV(values);
+      expect(csv, '');
     });
-    test('supplied number', () {
-      expect(ifNull(123,1), 123);
+    test('single value', () {
+      Map values = {'a': 1};
+      final csv = mapToCSV(values);
+      expect(csv, '"1"');
     });
-    test('both null', () {
-      expect(ifNull(null,null), null);
+    test('multiple values', () {
+      Map values = {'a': 1, 'b': 2};
+      final csv = mapToCSV(values);
+      expect(csv, '"1","2"');
     });
-    test('absent string', () {
-      expect(ifNull(null,'1'), '1');
+    test('simple string', () {
+      Map values = {'a': 'abc,def'};
+      final csv = mapToCSV(values);
+      expect(csv, '"abc,def"');
     });
-    test('supplied string', () {
-      expect(ifNull('123','1'), '123');
-    });
-    test('supplied string/number', () {
-      expect(ifNull('123',1), '123');
-    });
-    test('supplied number/string', () {
-      expect(ifNull(123,'1'), 123);
+    test('quoted string', () {
+      Map values = {'a': 'abc"def'};
+      final csv = mapToCSV(values);
+      expect(csv, '"abc""def"');
     });
   });
   group('pappes_utility RamCache positive testing', () {
@@ -70,9 +74,9 @@ void defineTests() {
       RamCache.remember('number 11', ++tempInt);
       expect(RamCache.recall('number 10'), 10);
       expect(RamCache.recall('number 11'), 11);
-      
+
       RamCache.remember('string 1', 'hello');
-      String tempStr = (RamCache.recall('string 1') as String).toUpperCase() ;
+      String tempStr = (RamCache.recall('string 1') as String).toUpperCase();
       RamCache.remember('string 2', tempStr);
       expect(RamCache.recall('string 1'), 'hello');
       expect(RamCache.recall('string 2'), 'HELLO');

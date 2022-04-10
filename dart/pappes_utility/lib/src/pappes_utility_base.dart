@@ -2,13 +2,20 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 library pappes_utility.base;
+
 part 'pappes_utility_ramcache.dart';
 
+/// Pull the values of of a [Map] and comma seperate them with quotes.
+///
+///
+String? mapToCSV(Map original) {
+  return original.values.map(quoteString).join(',');
+}
 
-/// Substitutes the value [alternate] if the value [test] is null.
-/// For example:
-/// 
-///    
-dynamic ifNull(test, alternate) {
-  return test != null ? test : alternate;
+/// Convert.
+///
+///
+String quoteString(dynamic original) {
+  String? replacement = original?.toString().replaceAll('"', '""');
+  return '"' + (replacement ?? '') + '"';
 }
