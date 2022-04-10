@@ -7,7 +7,7 @@ library pappes_web_utility.MyJS.test;
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 import 'package:test/test.dart';
 
-void main() => defineTests();
+void main() {} // tests are controlled from all_test.dart
 
 void defineTests() {
   group('pappes_web_utility MyJS tests', () {

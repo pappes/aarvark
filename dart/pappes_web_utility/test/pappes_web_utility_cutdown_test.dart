@@ -7,7 +7,7 @@ library pappes_web_utility.MyHtml.cutdown_test;
 import 'package:test/test.dart';
 import 'package:pappes_web_utility/pappes_web_utility.dart';
 
-void main() => defineTests();
+void main() {} // tests are controlled from all_test.dart
 
 void defineTests() {
   group('pappes_web_utility MyHtml tests for remove URI parameters', () {

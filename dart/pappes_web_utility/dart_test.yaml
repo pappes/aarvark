@@ -1,0 +1,9 @@
+# For test options see
+# https://github.com/dart-lang/test/blob/master/pkgs/test/doc/configuration.md
+
+# This is a browser-only package, so test on chrome by default.
+platforms: [chrome]
+# This package uses dart:io.
+test_on: browser
+
+custom_html_template_path: dart_test.html.tpl

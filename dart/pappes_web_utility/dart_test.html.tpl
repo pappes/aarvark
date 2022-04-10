@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>pappes_web_utility</title>
-    <link rel="x-dart-test" href="pappes_web_utility_myhtml_test.dart">
+    <title>{{testName}} Test</title>
+    {{testScript}}
 
- 
+
     <script async type="application/dart" src="all_test.dart"></script>
     <script async src="packages/browser/dart.js"></script>
     <script id=script_x async src="packages/browser/x.js"></script>
@@ -18,9 +18,25 @@
     
   </head>
   <body>
+
+
+    <h1>IFrame Testing</h1>
+    
+    <p id=inside_p>Page for testing iframe DART code in the pappes_web_utility library</p>
+    
+    <a id=inside_anchor_text href=http://www.abc.com/noredirect?u=realurl_com>
+    Non-redirect URL</a><br>
+    <a id=inside_anchor_button href=http://www.abc.com/redirect?u=www.realurl.com></a><br>
+    
+    
+    <frameset cols="25%,50%,25%">
+      <frame id=inside_frame_a src="inside_frame_a.htm">
+    </frameset>
+
+
     <h1>pappes_web_utility Testing</h1>
     
-    <p>Page for testing DART code in the pappes_web_utility library</p>
+    <p>Page for testing DART myHtml code in the pappes_web_utility library</p>
     
     <a id=non_redirect href=http://www.abc.com/noredirect?u=realurl_com>
     Non-redirect URL</a><br>
