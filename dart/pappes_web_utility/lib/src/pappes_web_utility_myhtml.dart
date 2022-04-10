@@ -189,7 +189,7 @@ class MyHtml {
   static bool _whitelistScripts(Element e) {
     log.info('Function : _whitelistScripts, Parameters : {[e,$e]}');
     bool retVal = false;
-    String src = ifNull(e.outerHtml, '').toLowerCase();
+    String src = (e.outerHtml ?? '').toLowerCase();
     if (src.contains('swf') ||
         src.contains('devtool') ||
         src.contains('devobj')) retVal = true;
@@ -387,7 +387,7 @@ class MyHtml {
       //whitelist all elements of type anchor that have text
       //so the user can click on links but not buttons
       target.querySelectorAll('a').forEach((Element e) {
-        String txt = ifNull(e.text, '');
+        String txt = (e.text ?? '');
         if (txt != '') _whitelistElementAndParents(e, elementsToBeDeleted);
       });
     }
