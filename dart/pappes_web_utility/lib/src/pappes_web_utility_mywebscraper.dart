@@ -96,4 +96,33 @@ class MyWebScraper {
 
     return elementText ?? defaultVal;
   }
+
+  /// Pull details from an IMDB web page into a map.
+  ///
+  static Map scrapeIMDB() {
+    log.info('Function : scrapeIMDB');
+    final retval = {};
+
+    retval['Name'] = getElementSequencialText(
+      document.documentElement!,
+      ['h1[data-testid="hero-title-block"]', 'h1[class*="TitleHeader"]'],
+    );
+    retval['Description'] = getElementSequencialText(
+      document.documentElement!,
+      [
+        'div[data-testid="storyline-plot-summary"]',
+        'span[data-testid*="plot"]'
+      ],
+    );
+    retval['Languages'] = getElementSequencialText(
+      document.documentElement!,
+      [
+        'li[data-testid="title-details-languages"]',
+        'a[href*="primary_language"]'
+      ],
+    );
+    window.navigator.clipboard?.writeText(retval.toString());
+
+    return retval;
+  }
 }
