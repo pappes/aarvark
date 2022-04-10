@@ -6,10 +6,6 @@ library pappes_utility.test;
 import 'pappes_utility_test.dart' as pappes_utility_test;
 import 'package:test/test.dart';
 
-
-
 main() {
   pappes_utility_test.defineTests();
 }
-
-

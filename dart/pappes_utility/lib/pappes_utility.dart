@@ -4,8 +4,4 @@
 /// Collection of utility classes and functions to make programs simpler.
 library pappes_utility;
 
-
-import 'src/pappes_utility_base.dart';
 export 'src/pappes_utility_base.dart';
-
-
