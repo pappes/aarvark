@@ -12,7 +12,6 @@ part of pappes_web_utility.base;
 ///
 
 typedef void _MyHtml_Element_Process(Element e);
-typedef Object _MyHtml_Alter_Element(Object e);
 
 class MyHtml {
   //implemented as a singleton as all instances would behave the same anyway
@@ -155,7 +154,6 @@ class MyHtml {
       Element node, String attribute, Object? alter(Object? a)) {
     log.info('Function : alterAttribute, '
         'Parameters : {[node,$node][attribute,$attribute][alter,$alter]}');
-    assert(alter is _MyHtml_Alter_Element);
     if (node.attributes.containsKey(attribute)) {
       log.finer(
           'Function : alterAttribute, old : ${node.attributes[attribute]}');

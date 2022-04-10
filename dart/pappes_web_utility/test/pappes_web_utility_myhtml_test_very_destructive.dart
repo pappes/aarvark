@@ -6,7 +6,7 @@ library pappes_web_utility.MyHtml.very.dest.test;
 @TestOn('browser && js')
 import 'package:test/test.dart';
 //import 'dart:html';
-import 'package:pappes_web_utility/pappes_web_utility.dart';
+//import 'package:pappes_web_utility/pappes_web_utility.dart';
 
 void main() => defineTests();
 
