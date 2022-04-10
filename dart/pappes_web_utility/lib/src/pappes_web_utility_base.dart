@@ -14,6 +14,7 @@ import 'package:pappes_utility/pappes_utility.dart';
 part 'pappes_web_utility_myhtml.dart';
 part 'pappes_web_utility_myiframe.dart';
 part 'pappes_web_utility_myjs.dart';
+part 'pappes_web_utility_mywebscraper.dart';
 
 /// Converts [val] from base64 to text.
 ///
