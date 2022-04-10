@@ -123,6 +123,7 @@ class MyWebScraper {
     );
     window.navigator.clipboard?.writeText(retval.toString());
 
+    log.info('Function : scrapeIMDB, found : {[map,${retval.toString()}]}');
     return retval;
   }
 }
