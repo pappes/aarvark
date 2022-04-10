@@ -88,8 +88,8 @@ class MyHtml {
         base64Uri = base64Decode(param);
       }
     }
-    finalUrl = setUriSchemeToHttp(ifNull(finalUrl, base64Uri));
-    finalUrl = ifNull(finalUrl, originalUrl);
+    finalUrl = setUriSchemeToHttp(finalUrl ?? base64Uri);
+    finalUrl = finalUrl ?? originalUrl;
     log.fine('Function : removeUrlRedirect, Return : $finalUrl');
     return finalUrl;
   }
@@ -98,24 +98,24 @@ class MyHtml {
   ///
   /// This is used to ensure that URLs that do not include the scheme
   /// are treated as absolute paths (not relative to the document URL).
-  static String? setUriSchemeToHttp(String originalURL) {
+  static String? setUriSchemeToHttp(String? originalURL) {
     String? finalUrl;
     Uri parsedUri;
     log.info(
         'Function : setUriSchemeToHttp, Parameters : {[originalURL,$originalURL ]}');
     try {
-      parsedUri = Uri.parse(originalURL);
+      parsedUri = Uri.parse(originalURL!);
       if (parsedUri.scheme == '') {
         finalUrl = parsedUri
             .replace(scheme: 'http', path: r'//' + parsedUri.path)
             .toString();
-        //the following line to to work around a bug in Darts URI library
+        //the following line is to work around a bug in Darts URI library
         finalUrl = finalUrl.replaceFirst(r'http:////', r'http://');
       }
     } catch (e) {
       //invalid URLs to be passed back unmodified
     }
-    finalUrl = ifNull(finalUrl, originalURL);
+    finalUrl = finalUrl ?? originalURL;
     log.fine('Function : setUriSchemeToHttp, Return : $finalUrl');
     return finalUrl;
   }

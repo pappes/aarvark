@@ -129,7 +129,7 @@ class MyIFrame {
         '[cleanUpProcess,$cleanUpProcess], [allowRedirect,$allowRedirect]}');
     if (iFrameSource.contains('</html>')) {
       _embedIFrameInBody(iFrameSource, cleanUpProcess);
-    } else if (ifNull(getIFrameHtml(), '') != '') {
+    } else if ((getIFrameHtml() ?? '') != '') {
       _embedIFrameInBody(
           ' data:text/html,' + getIFrameHtml()!, cleanUpProcess, iFrameSource);
     } else {
