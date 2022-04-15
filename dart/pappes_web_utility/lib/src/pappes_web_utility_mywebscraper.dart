@@ -56,6 +56,8 @@ class MyWebScraper {
     var resultIndex = 1;
     for (final resultJson in jsonList) {
       final result = jsonDecode(resultJson);
+      log.info(
+          'Function : scrapeAnywhereList, found : {[decoded json,${result.toString()}]}');
       retval.add(summariseAnywhereShow(resultIndex++, result));
     }
 
@@ -65,6 +67,7 @@ class MyWebScraper {
   }
 
   static Map summariseAnywhereShows(int index, Object results) {
+    log.info('Function : summariseAnywhereShows');
     if (results is Map) {
       return summariseAnywhereShow(index, results);
     } else if (results is Iterable) {
@@ -76,10 +79,13 @@ class MyWebScraper {
         }
       }
     }
+    log.info(
+        'Function : summariseAnywhereShow, found : {[unexpected json contents,${results.toString()}]}');
     return {};
   }
 
   static Map summariseAnywhereShow(int index, Map resultMap) {
+    log.info('Function : summariseAnywhereShow');
     final retval = {};
     if (resultMap["@type"] == "Event") {
       retval["index"] = index;
@@ -105,6 +111,8 @@ class MyWebScraper {
         }
       }
     }
+    log.info(
+        'Function : summariseAnywhereShow, found : {[map,${retval.toString()}]}');
 
     return retval;
   }
