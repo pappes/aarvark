@@ -55,6 +55,8 @@ class MyWebScraper {
     );
     var resultIndex = 1;
     for (final resultJson in jsonList) {
+      log.info(
+          'Function : scrapeAnywhereList, found : {[encoded json,${resultJson.toString()}]}');
       final result = jsonDecode(resultJson);
       log.info(
           'Function : scrapeAnywhereList, found : {[decoded json,${result.toString()}]}');
