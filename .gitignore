@@ -14,3 +14,7 @@ packages/
 pubspec.lock
 dart/*/.packages
 dart/*/.dart_tool
+dart/pappes_utility/.packages
+dart/pappes_utility/.dart_tool
+dart/pappes_web_utility/.packages
+dart/pappes_web_utility/.dart_tool
