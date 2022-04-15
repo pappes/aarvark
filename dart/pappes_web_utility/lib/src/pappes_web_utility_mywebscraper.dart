@@ -56,8 +56,8 @@ class MyWebScraper {
     var resultIndex = 1;
     for (final resultJson in jsonList) {
       log.info(
-          'Function : scrapeAnywhereList, found : {[encoded json,${resultJson.toString()}]}');
-      final result = jsonDecode(resultJson);
+          'Function : scrapeAnywhereList, found : {[encoded json,${resultJson.innerHtml.toString()}]}');
+      final result = jsonDecode(resultJson.innerHtml);
       log.info(
           'Function : scrapeAnywhereList, found : {[decoded json,${result.toString()}]}');
       retval.add(summariseAnywhereShow(resultIndex++, result));
