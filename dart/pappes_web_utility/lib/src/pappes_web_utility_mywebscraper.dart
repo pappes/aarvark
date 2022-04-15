@@ -12,6 +12,97 @@ part of pappes_web_utility.base;
 ///
 
 class MyWebScraper {
+  /// Pull details from an IMDB web page into a map.
+  ///
+  static Map scrapeIMDB() {
+    log.info('Function : scrapeIMDB');
+    final retval = {};
+
+    retval['Name'] = getElementSequencialText(
+      document.documentElement!,
+      ['h1[data-testid="hero-title-block"]', 'h1[class*="TitleHeader"]'],
+    );
+    retval['Description'] = getElementSequencialText(
+      document.documentElement!,
+      [
+        'div[data-testid="storyline-plot-summary"]',
+        'span[data-testid*="plot"]'
+      ],
+    );
+    retval['Languages'] = getElementSequencialText(
+      document.documentElement!,
+      [
+        'li[data-testid="title-details-languages"]',
+        'a[href*="primary_language"]'
+      ],
+    );
+
+    log.info('Function : scrapeIMDB, found : {[map,${retval.toString()}]}');
+    return retval;
+  }
+
+  /// Pull details from an anywhere search result web page into a map.
+  ///
+  static Map scrapeAnywhereList() {
+    log.info('Function : scrapeAnywhereList');
+    final retval = {};
+
+    final jsonList = getElementsList(
+      document.documentElement!,
+      'div[class="tribe-events-l-container]',
+    );
+    var resultIndex = 1;
+    for (final resultJson in jsonList) {
+      final resultMap = jsonDecode(resultJson);
+      retval.addAll(summariseAnywhereShow(resultIndex++, resultMap));
+    }
+
+    log.info(
+        'Function : scrapeAnywhereList, found : {[map,${retval.toString()}]}');
+    return retval;
+  }
+
+  static Map summariseAnywhereShow(int index, Map resultMap) {
+    final retval = {};
+    final fmt = DateFormat('dd-MMM-yyyy hh:mm a');
+    retval["index"] = index;
+    retval["name"] = resultMap["name"];
+    retval["description"] = resultMap["description"];
+    retval["link"] = resultMap["url"];
+    retval["startTime"] = fmt.format(resultMap["startDate"]);
+    retval["endTime"] = fmt.format(resultMap["endDate"]);
+    retval["duration"] = getDurationText(
+      resultMap["startDate"],
+      resultMap["endDate"],
+    );
+    retval["venue"] = resultMap["location"]["name"];
+    retval["suburb"] = resultMap["location"]["addressLocality"];
+    retval["postcode"] = resultMap["location"]["postalCode"];
+    retval["producer"] = resultMap["organizer"]["name"];
+    var price = -1;
+    for (final ticketCat in resultMap["offers"]) {
+      if (ticketCat["availability"] == "InStock" &&
+          ticketCat["price"] > price &&
+          ticketCat["validThrough"] < DateTime.now()) {
+        price = ticketCat["price"];
+      }
+    }
+    retval["venue"] = resultMap["location"]["name"];
+    retval["venue"] = resultMap["location"]["name"];
+    retval["venue"] = resultMap["location"]["name"];
+
+    return retval;
+  }
+
+  static String? getDurationText(DateTime start, DateTime end) {
+    try {
+      final totalMinutes = end.difference(start).inMinutes;
+      final hours = (totalMinutes / 60).round();
+      final minutes = (totalMinutes % 60).round();
+      return "${hours}:${minutes}";
+    } finally {}
+  }
+
   /// Uses a JS query [selector] to find an element in the page
   /// and returns a text version of it.
   ///
@@ -97,32 +188,22 @@ class MyWebScraper {
     return elementText ?? defaultVal;
   }
 
-  /// Pull details from an IMDB web page into a map.
+  /// Uses a JS query [selector] to find all matching elements in the page/
   ///
-  static Map scrapeIMDB() {
-    log.info('Function : scrapeIMDB');
-    final retval = {};
+  ///
+  /// ## For example:
+  ///    MyHtml.getElementText('div[data-testid="storyline-plot-summary"]');
+  static List getElementsList(Element root, String selector,
+      [List defaultVal = const []]) {
+    log.info('Function : getElementsList, Parameters : {[selector,$selector]}');
 
-    retval['Name'] = getElementSequencialText(
-      document.documentElement!,
-      ['h1[data-testid="hero-title-block"]', 'h1[class*="TitleHeader"]'],
-    );
-    retval['Description'] = getElementSequencialText(
-      document.documentElement!,
-      [
-        'div[data-testid="storyline-plot-summary"]',
-        'span[data-testid*="plot"]'
-      ],
-    );
-    retval['Languages'] = getElementSequencialText(
-      document.documentElement!,
-      [
-        'li[data-testid="title-details-languages"]',
-        'a[href*="primary_language"]'
-      ],
-    );
+    // find element
+    final elements = root.querySelectorAll(selector);
+    log.finest('Function : getElementsList, # found : ${elements.length}');
 
-    log.info('Function : scrapeIMDB, found : {[map,${retval.toString()}]}');
-    return retval;
+    if (elements.isEmpty) {
+      return defaultVal;
+    }
+    return elements;
   }
 }
