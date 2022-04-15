@@ -12,6 +12,8 @@ part of pappes_web_utility.base;
 ///
 
 class MyWebScraper {
+  static final fmt = DateFormat('dd-MMM-yyyy hh:mm a');
+
   /// Pull details from an IMDB web page into a map.
   ///
   static Map scrapeIMDB() {
@@ -43,53 +45,66 @@ class MyWebScraper {
 
   /// Pull details from an anywhere search result web page into a map.
   ///
-  static Map scrapeAnywhereList() {
+  static List<Map> scrapeAnywhereList() {
     log.info('Function : scrapeAnywhereList');
-    final retval = {};
+    final retval = <Map>[];
 
     final jsonList = getElementsList(
       document.documentElement!,
-      'div[class="tribe-events-l-container]',
+      'div.tribe-events-l-container script',
     );
     var resultIndex = 1;
     for (final resultJson in jsonList) {
-      final resultMap = jsonDecode(resultJson);
-      retval.addAll(summariseAnywhereShow(resultIndex++, resultMap));
+      final result = jsonDecode(resultJson);
+      retval.add(summariseAnywhereShow(resultIndex++, result));
     }
 
     log.info(
-        'Function : scrapeAnywhereList, found : {[map,${retval.toString()}]}');
+        'Function : scrapeAnywhereList, found : {[list,${retval.toString()}]}');
     return retval;
+  }
+
+  static Map summariseAnywhereShows(int index, Object results) {
+    if (results is Map) {
+      return summariseAnywhereShow(index, results);
+    } else if (results is Iterable) {
+      for (final result in results) {
+        if (result is Map) {
+          return summariseAnywhereShow(index, result);
+        } else if (result is Iterable) {
+          return summariseAnywhereShows(index, result);
+        }
+      }
+    }
+    return {};
   }
 
   static Map summariseAnywhereShow(int index, Map resultMap) {
     final retval = {};
-    final fmt = DateFormat('dd-MMM-yyyy hh:mm a');
-    retval["index"] = index;
-    retval["name"] = resultMap["name"];
-    retval["description"] = resultMap["description"];
-    retval["link"] = resultMap["url"];
-    retval["startTime"] = fmt.format(resultMap["startDate"]);
-    retval["endTime"] = fmt.format(resultMap["endDate"]);
-    retval["duration"] = getDurationText(
-      resultMap["startDate"],
-      resultMap["endDate"],
-    );
-    retval["venue"] = resultMap["location"]["name"];
-    retval["suburb"] = resultMap["location"]["addressLocality"];
-    retval["postcode"] = resultMap["location"]["postalCode"];
-    retval["producer"] = resultMap["organizer"]["name"];
-    var price = -1;
-    for (final ticketCat in resultMap["offers"]) {
-      if (ticketCat["availability"] == "InStock" &&
-          ticketCat["price"] > price &&
-          ticketCat["validThrough"] < DateTime.now()) {
-        price = ticketCat["price"];
+    if (resultMap["@type"] == "Event") {
+      retval["index"] = index;
+      retval["name"] = resultMap["name"];
+      retval["description"] = resultMap["description"];
+      retval["link"] = resultMap["url"];
+      retval["startTime"] = fmt.format(resultMap["startDate"]);
+      retval["endTime"] = fmt.format(resultMap["endDate"]);
+      retval["duration"] = getDurationText(
+        resultMap["startDate"],
+        resultMap["endDate"],
+      );
+      retval["venue"] = resultMap["location"]["name"];
+      retval["suburb"] = resultMap["location"]["addressLocality"];
+      retval["postcode"] = resultMap["location"]["postalCode"];
+      retval["producer"] = resultMap["organizer"]["name"];
+      var price = -1;
+      for (final ticketCat in resultMap["offers"]) {
+        if (ticketCat["availability"] == "InStock" &&
+            ticketCat["price"] > price &&
+            ticketCat["validThrough"] < DateTime.now()) {
+          price = ticketCat["price"];
+        }
       }
     }
-    retval["venue"] = resultMap["location"]["name"];
-    retval["venue"] = resultMap["location"]["name"];
-    retval["venue"] = resultMap["location"]["name"];
 
     return retval;
   }
